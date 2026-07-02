@@ -1,0 +1,14 @@
+{
+  "name": "fgs-geneve-visite-numerique",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Outils de génération audio (Google Cloud Text-to-Speech) pour le guide de visite numérique de Fo Guang Shan Genève.",
+  "scripts": {
+    "voices": "node list-voices.js",
+    "generate-audio": "node generate-audio.js",
+    "update-durations": "node update-durations.js"
+  },
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^5.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 240 248" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le poisson en bois">
+  <title>Le poisson en bois</title>
+  <circle cx="120" cy="112" r="100" fill="#F6F1E7" stroke="#3E2C22" stroke-width="3"/>
+  <circle cx="120" cy="112" r="93" fill="none" stroke="#B8862E" stroke-width="1.5" opacity="0.7"/>
+  <g transform="translate(120,100)">
+    <path d="M-30,2 C-30,-22 -2,-30 18,-14 C30,-4 30,10 16,18 C0,26 -22,20 -30,2 Z" fill="none" stroke="#3E2C22" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="-16" cy="-6" r="3" fill="#3E2C22"/>
+        <path d="M16,18 q12,4 16,16" fill="none" stroke="#3E2C22" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M-8,-16 q8,-2 12,4" fill="none" stroke="#B8862E" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <rect x="55.00" y="222" width="26.00" height="12" fill="#1E3A5F" stroke="#FFFFFF" stroke-width="0.4"/><rect x="81.00" y="222" width="26.00" height="12" fill="#E8B93B" stroke="#FFFFFF" stroke-width="0.4"/><rect x="107.00" y="222" width="26.00" height="12" fill="#B33A3A" stroke="#FFFFFF" stroke-width="0.4"/><rect x="133.00" y="222" width="26.00" height="12" fill="#F6F1E7" stroke="#FFFFFF" stroke-width="0.4"/><rect x="159.00" y="222" width="26.00" height="12" fill="#D98A3D" stroke="#FFFFFF" stroke-width="0.4"/>
+</svg>

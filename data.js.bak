@@ -1,0 +1,381 @@
+/**
+ * data.js — Contenu du visiteur numérique de Fo Guang Shan Genève.
+ *
+ * Toutes les données de visite vivent ici, séparées de la mise en page
+ * (index.html) et du comportement (script.js). Pour ajouter, modifier ou
+ * retirer un point de visite, il suffit de modifier ce tableau — aucun
+ * autre fichier n'a besoin d'être touché.
+ *
+ * Champs de chaque élément :
+ *   id                identifiant unique, repris du numérotage des fiches papier (ex. "1-1")
+ *   order             ordre d'affichage dans la visite (entier, 1, 2, 3…)
+ *   title             titre français de la fiche
+ *   category          type d'élément (Statue, Symbole, Bodhisattva, Enseignement,
+ *                      Maître, Instrument rituel, Vêtement rituel, Bouddha)
+ *   area              zone du temple où se trouve l'élément
+ *   image             chemin de l'image — PLACEHOLDER : à remplacer par la
+ *                      photographie réelle correspondant à la fiche papier
+ *   imageAlt          texte alternatif décrivant l'image (accessibilité)
+ *   shortDescription  résumé d'une à deux phrases, pour les cartes et les résultats de recherche
+ *   fullText          texte complet de la fiche, sous forme de tableau de paragraphes
+ *   audio             chemin du fichier audio — PLACEHOLDER, à remplacer par
+ *                      l'enregistrement définitif (mp3)
+ *   audioDuration     durée de l'audio en secondes — PLACEHOLDER, à corriger
+ *                      une fois l'enregistrement réel disponible
+ */
+
+// Informations générales du temple, utilisées sur la page d'accueil et "À propos".
+// Tous les champs marqués [À COMPLÉTER] sont des espaces réservés : remplacez-les
+// par les informations réelles du temple avant la mise en ligne.
+const TEMPLE_INFO = {
+  name: "Fo Guang Shan Genève",
+  tagline: "Un lieu de calme, d'étude et de pratique au cœur de Genève",
+  intro:
+    "Fo Guang Shan Genève accueille les visiteurs souhaitant découvrir le bouddhisme humaniste, " +
+    "ses statues, ses objets rituels et ses enseignements. Ce guide numérique reprend le contenu " +
+    "des fiches d'information du temple : il vous accompagne, fiche par fiche, à travers les " +
+    "différentes zones du lieu.",
+  howToUse: [
+    "Parcourez la visite dans l'ordre, ou utilisez la recherche pour trouver directement un élément.",
+    "Chaque fiche peut être lue ou écoutée : activez le lecteur audio quand vous êtes devant l'objet.",
+    "Le sommaire latéral indique toujours où vous en êtes dans la visite.",
+  ],
+  openingInfo: [
+    "[À COMPLÉTER] Jours et horaires d'ouverture au public.",
+    "[À COMPLÉTER] Modalités de visite libre ou guidée.",
+  ],
+  notices: [
+    "Merci de garder le silence dans la Grande salle du Bouddha pendant les méditations et les cérémonies.",
+    "Une tenue sobre et des épaules couvertes sont appréciées.",
+    "Les photographies sont généralement bienvenues hors des temps de cérémonie — merci de demander à l'accueil en cas de doute.",
+    "[À COMPLÉTER] Toute autre consigne propre au lieu.",
+  ],
+  contact: {
+    address: "[À COMPLÉTER] Adresse complète",
+    phone: "[À COMPLÉTER] Numéro de téléphone",
+    email: "[À COMPLÉTER] Adresse e-mail",
+    website: "[À COMPLÉTER] Site web",
+  },
+};
+
+// Zones du temple, dans l'ordre de visite suggéré.
+const AREAS = [
+  "Entrée et parvis",
+  "Grande salle du Bouddha",
+  "Salle de Ksitigarbha",
+];
+
+const TOUR_ITEMS = [
+  {
+    id: "1-1",
+    order: 1,
+    title: "Statue du Bouddha Maitreya",
+    category: "Statue",
+    area: "Entrée et parvis",
+    image: "images/1-1-maitreya.svg",
+    imageAlt:
+      "Illustration provisoire représentant une silhouette assise et souriante — à remplacer par la photographie de la statue du Bouddha Maitreya.",
+    shortDescription:
+      "Le « Bouddha heureux », toujours souriant, symbole de fraternité et de patience infinie ; il succédera un jour au Bouddha Shakyamuni.",
+    fullText: [
+      "Maitri signifie en sanskrit amical, bienveillant. Le Bouddha Maitreya toujours représenté souriant, symbolise par conséquent la fraternité et est surnommé « le Bouddha heureux » en Chine. Il possède la capacité de compassion qui ne se limite pas à la bienveillance envers les êtres, mais se manifeste aussi par une tolérance et une patience incommensurables.",
+      "Le Bouddha Maitreya est le prochain Bouddha qui succédera au Bouddha Shakyamuni. Avant de devenir Bouddha Maitreya, il porte encore le nom de Bodhisattva Maitreya. Selon les sutras, après la disparition des enseignements du Bouddha Shakyamuni dans le monde et après une période extrêmement longue d'environ 5,67 milliards d'années, le Bodhisattva Maitreya descendra du Palais intérieur du ciel Tushita où il se trouve actuellement pour naître dans le monde humain. Il atteindra l'Éveil, deviendra ainsi le Bouddha Maitreya et présidera trois grandes assemblées de dharma afin de délivrer tous les êtres qui ont eu des liens favorables avec le Dharma.",
+      "La statue du Bouddha Maitreya le représente la tête légèrement inclinée vers le bas pour regarder le monde depuis le ciel et toujours souriant. Il est assis avec l'un de ses pieds reposant sur le sol, indiquant qu'il se prépare à se lever et à descendre sur terre en tant que prochain Bouddha.",
+    ],
+    audio: "audio/1-1.mp3",
+    audioDuration: 95,
+  },
+  {
+    id: "1-2",
+    order: 2,
+    title: "Le drapeau bouddhique",
+    category: "Symbole",
+    area: "Entrée et parvis",
+    image: "images/1-2-drapeau.svg",
+    imageAlt:
+      "Illustration provisoire d'un drapeau à cinq bandes verticales colorées — à remplacer par la photographie du drapeau bouddhique du temple.",
+    shortDescription:
+      "Conçu en 1884-85 et adopté en 1950, ses cinq couleurs reprennent l'aura du Bouddha Shakyamuni au moment de son Éveil.",
+    fullText: [
+      "Le drapeau bouddhique fut conçu en 1884-85 par le Colombo Comitee sur suggestion de Henry Steel Olcott et adopté par la Fédération mondiale du bouddhisme en 1950. Depuis, il est largement utilisé dans tous les pays bouddhistes et flotte sur les temples et à l'occasion des manifestations religieuses.",
+      "Signification symbolique : le drapeau utilise les cinq couleurs dégagées par l'aura du Bouddha Shakyamuni au moment de son Éveil. Ces cinq couleurs représentent les cinq sources de perfectionnement indispensables à la pratique bouddhique.",
+      "Cinq bandes verticales unies se succèdent : le bleu, symbole de la méditation ; le jaune clair, pour la « pensée juste » ; le rouge, pour l'énergie spirituelle ; le blanc, pour la « foi sereine » ; la couleur orangée, pour l'intelligence, est un composé des quatre couleurs précédentes, car l'intelligence est considérée comme la synthèse des qualités que ces couleurs symbolisent et rappelle le safran des robes de moines.",
+      "La sixième bande verticale reprend ces cinq couleurs dans le même ordre et disposées verticalement. Le spectre de l'aura du Bouddha Shakyamuni est un mélange de couleurs désigné sous le nom de Prabashvara « d'un éclat suprême ou l'essence de la lumière » et est lié à la grande joie ou félicité (en sanskrit Pra : préfixe signifiant intensément, éclatant ; Bhāsvara : brillant, lumineux, resplendissant, dérivé de la racine bhās signifiant briller, luire).",
+    ],
+    audio: "audio/1-2.mp3",
+    audioDuration: 110,
+  },
+  {
+    id: "1-3",
+    order: 3,
+    title: "Statue en bronze de Bodhidharma",
+    category: "Statue",
+    area: "Entrée et parvis",
+    image: "images/1-3-bodhidharma.svg",
+    imageAlt:
+      "Illustration provisoire d'une silhouette portant un bâton avec une chaussure suspendue — à remplacer par la photographie de la statue en bronze de Bodhidharma.",
+    shortDescription:
+      "Fondateur de l'école Chan en Chine, célèbre pour ses neuf années de méditation face à un mur et la légende de la chaussure unique.",
+    fullText: [
+      "Bodhidharma, moine bouddhiste d'origine indienne, introduisit le bouddhisme Chan en Chine ; il est par conséquent le fondateur de l'école Chan en Chine. Bodhidharma arrive en Chine en 527 durant la dynastie Liang (502–557) et y rencontre l'Empereur Wu qui est incapable de comprendre la signification profonde de ses paroles. Bodhidharma le quitte, traverse le fleuve Yangzi, entre dans le royaume des Wei et s'arrête au monastère Shaolin du mont Song au Henan. Là, il médite pendant neuf ans devant un mur, d'où est venu son surnom de « Brahmane contemplant un mur ».",
+      "Trois ans après la mort de Bodhidharma, l'ambassadeur Song Yun du nord de Wei l'aurait vu dans les montagnes du Pamir cheminant vers l'Inde. Il s'étonne que Bodhidharma marche en tenant un bâton sur son épaule au bout duquel est suspendue une chaussure. Song Yun demande à Bodhidharma où il va, Bodhidharma lui répond : « Je rentre à la maison ». Puis lorsque Song Yun lui demande pourquoi une chaussure se trouve accrochée au bout de son bâton, Bodhidharma répond étonnamment : « Vous le saurez quand vous arriverez au monastère de Shaolin. Ne mentionnez pas que vous m'avez vu, sinon un désastre se produira ».",
+      "Malgré cet avertissement, à son arrivée au palais, Song Yun rapporte à l'empereur qu'il a rencontré Bodhidharma en chemin. L'empereur déclare alors que Bodhidharma est déjà mort et enterré, puis il fait arrêter Song Yun pour avoir menti. Au monastère de Shaolin, les moines confirment que Bodhidharma est décédé et a été enterré dans une colline derrière le temple. La tombe est réouverte et on n'y trouve le corps du défunt Bodhidharma avec une seule chaussure. Les moines s'exclament alors : « Le Maître est rentré chez lui ! » et ils se prosternent trois fois.",
+    ],
+    audio: "audio/1-3.mp3",
+    audioDuration: 130,
+  },
+  {
+    id: "1-4",
+    order: 4,
+    title: "Emblème de la BLIA",
+    category: "Symbole",
+    area: "Entrée et parvis",
+    image: "images/1-4-blia.svg",
+    imageAlt:
+      "Illustration provisoire d'un cercle contenant une fleur de lotus stylisée — à remplacer par la photographie de l'emblème de la BLIA sur les portes du temple.",
+    shortDescription:
+      "Le cercle, symbole de perfection sans entraves, et la fleur de lotus, symbole de pureté, emblème de la Buddha's Light International Association.",
+    fullText: [
+      "Le cercle, symbole de perfection sans entraves. Le cercle évoque le « sans commencement ni fin », l'éternelle émission de vœux, et la perfection sans entraves, qui font tourner la roue du Dharma continuellement dans le monde des hommes. La fleur de lotus née du cercle, symbolise la pureté. Dans le monde parfait et sans entraves, nous cultivons la bodhicitta (bodhi : éveil, citta : cœur-esprit) qui s'épanouit comme la fleur de lotus et qui permet à la lumière bouddhique d'éclairer le monde entier. La lumière bienfaisante pénètre dans le cœur de chacun qui émet le même vœu, ainsi finalement le monde devient une Terre Pure et tous les êtres deviennent des bouddhas.",
+      "Le cercle représente la Terre, la fleur de lotus symbolise la transcendance. La Terre représente le monde ordinaire, tandis que la fleur de lotus symbolise le monde immortel et pur transcendant la suprême vérité. Nous devons les associer de sorte que la clarté et la pureté de la fleur de lotus se reflètent sur cette Terre pour qu'elle devienne le monde le plus parfait de l'univers. Cela symbolise la non-dualité entre le mondain et l'extra-mondain, permettant à notre monde de devenir un royaume du Dharma. La pureté de la fleur de lotus permet à la Terre entière de se transcender et de devenir une Terre Pure mondaine.",
+    ],
+    audio: "audio/1-4.mp3",
+    audioDuration: 100,
+  },
+  {
+    id: "2-1",
+    order: 5,
+    title: "Bodhisattva Avalokiteshvara",
+    category: "Bodhisattva",
+    area: "Grande salle du Bouddha",
+    image: "images/2-1-avalokiteshvara.svg",
+    imageAlt:
+      "Illustration provisoire d'un vase stylisé — à remplacer par la photographie de la statue du Bodhisattva Avalokiteshvara.",
+    shortDescription:
+      "« Celui qui écoute les Sons du Monde Entier » (Kuan Yin), incarnation de la grande compassion ; son mantra, Om Maṇi Padme Hum, est le plus récité.",
+    fullText: [
+      "Bodhisattva : littéralement « être d'éveil » en sanskrit (bodhi : éveil, sattva : être). Dans le bouddhisme Mahāyāna, un bodhisattva désigne celui qui a formulé le vœu de suivre le chemin indiqué par le Bouddha Shakyamuni, qui a pris refuge auprès des « Trois Joyaux » (Bouddha, Dharma, Sangha) et respecte les préceptes destinés aux bodhisattvas. Il aide d'abord les autres êtres sensibles à s'éveiller, retardant sa propre libération par compassion.",
+      "Avalokiteshvara : (en sanskrit Avalokite : observer et contempler, svara : capable ou souverain) « Celui qui regarde vers le bas avec compassion » représente la grande compassion et la bienveillance. Son nom Kuan Yin en chinois signifie « Celui qui écoute les Sons du Monde Entier » pour venir en aide à tous, à tout moment. Avalokiteshvara a fait le grand vœu de secourir tous les êtres sensibles et de reporter son propre état de bouddha jusqu'à ce qu'il ait aidé chaque être sur Terre à atteindre le Nirvana. Il tient un vase contenant un nectar purifiant qui soulage les maladies, les douleurs et les angoisses des êtres.",
+      "Le mantra de six syllabes du Bodhisattva Avalokiteshvara est le mantra le plus connu et récité : Om Maṇi Padme Hum.",
+    ],
+    audio: "audio/2-1.mp3",
+    audioDuration: 115,
+  },
+  {
+    id: "2-2",
+    order: 6,
+    title: "Le noble sentier octuple",
+    category: "Enseignement",
+    area: "Grande salle du Bouddha",
+    image: "images/2-2-sentier-octuple.svg",
+    imageAlt:
+      "Illustration provisoire de huit rayons partant d'un centre — à remplacer par la photographie des huit poutres de la Grande salle du Bouddha.",
+    shortDescription:
+      "Les huit poutres du toit représentent les huit pratiques du chemin vers l'Éveil : moralité, culture mentale et sagesse.",
+    fullText: [
+      "Les huit grandes poutres soutenant le toit de la grande salle du Bouddha représentent « le noble sentier octuple ». On dit que le sentier est noble car il est moralement juste et ne contient rien qui mène à l'égarement. Inspiré de la moralité et de la méditation, ce chemin mène à l'Éveil, à la cessation de la souffrance et de l'illusion, par l'évolution vers la sagesse.",
+      "Les huit pratiques fondamentales du chemin sont réparties en trois ensembles. La moralité, la discipline, l'éthique : action juste, parole juste, moyens d'existence justes. La culture mentale : effort juste ou persévérance juste, attention juste, concentration juste. La sagesse : compréhension juste, pensée juste.",
+      "Action juste : éviter toute action malsaine en respectant les cinq préceptes. Parole juste : ne pas mentir, ne pas semer la discorde ou la désunion, ne pas tenir un langage grossier, ne pas bavarder oisivement. Moyens d'existence justes : subvenir à ses besoins en exerçant une profession honnête et convenable ne nuisant pas aux autres. Effort juste ou persévérance juste : entreprendre ce qui est favorable et vaincre ce qui est défavorable. Attention juste : pleine conscience ou prise de conscience juste des choses, de soi, des autres, de la réalité, conformément au juste Dharma. Concentration juste : se focaliser mentalement sur un seul objet comme la respiration en méditation pour atteindre le calme et la paix de l'esprit. Compréhension juste : comprendre la réalité, les « Quatre Nobles Vérités ». Pensée juste : motivation juste, discernement dénué des « Trois Poisons » que sont la colère, l'avidité et l'ignorance.",
+    ],
+    audio: "audio/2-2.mp3",
+    audioDuration: 150,
+  },
+  {
+    id: "3-1",
+    order: 7,
+    title: "Bouddha Shakyamuni",
+    category: "Bouddha",
+    area: "Grande salle du Bouddha",
+    image: "images/3-1-shakyamuni.svg",
+    imageAlt:
+      "Illustration provisoire d'une silhouette assise auréolée de rayons — à remplacer par la photographie de la statue du Bouddha Shakyamuni.",
+    shortDescription:
+      "Né Siddhārtha Gautama, il atteint l'Éveil à Bodh Gaya et énonça les Quatre Nobles Vérités ; le svastika sur sa poitrine symbolise la sagesse infinie.",
+    fullText: [
+      "Bouddha Shakyamuni signifie en sanskrit « le Sage des Shakyas ». Shakya signifie littéralement capable, digne, puissant, et désigne historiquement le clan guerrier Kshatriya du nord de l'Inde au VIe siècle av. J.-C. dont est issu le Bouddha Shakyamuni. Bouddha vient du sanskrit buddha signifiant « éveillé ».",
+      "Le Bouddha historique Shakyamuni est né à Lumbini sous le nom de Siddhārtha Gautama au 5ème siècle av. J.-C. environ. Un jour, devenu jeune homme, il sort de son palais et se trouve confronté à la vue d'une personne malade, d'un vieillard, d'une famille pleurant un défunt puis d'un ascète. Suite à ces quatre rencontres et attristé par les souffrances que les êtres humains subissent tout au long de leur vie, il décide de chercher à comprendre et de trouver le remède à la souffrance humaine. C'est avec cet objectif en vue qu'il quitte le confort de son foyer à l'âge de 29 ans.",
+      "Après de nombreuses périlleuses et vaines pérégrinations qui le mènent jusqu'à des pratiques ascétiques extrêmes, Siddhārtha réalise que ce n'est pas en mettant sa vie en danger qu'il trouvera des réponses. Il renonce alors à cette méthode extrême pour suivre la « voie du milieu ». Remis en bonne condition physique, il arrive à Bodh Gaya. Là, il s'assoit sous un arbre figuier (l'arbre de la Bodhi) et fait le vœu de ne pas se lever avant d'avoir trouvé le moyen de faire cesser la souffrance humaine. Après une méditation intense de 49 jours, Siddhārtha atteint l'Éveil. Il prend conscience que l'illusion et l'attachement sont les obstacles à la réalisation de l'état de bouddhéité ; il a compris l'ultime vérité de l'univers et découvert la loi de coproduction conditionnée. Dès lors, il devient le Bouddha Shakyamuni, l'Illuminé ou l'Éveillé.",
+      "Le Bouddha Shakyamuni prononce son premier sermon dans le parc aux gazelles à Sarnath ; il y énonce les « Quatre Nobles Vérités » : la vérité sur la souffrance, l'origine de la souffrance, la cessation de la souffrance et le chemin menant à la cessation de la souffrance. Pendant 49 ans, il donne ses enseignements, fonde le Sangha (communauté des moines et des nonnes) perpétuant ainsi le Dharma après sa disparition. Le Bouddha décède (atteint le Parinirvana) à l'âge de 80 ans à Kushinagar.",
+      "Parmi tous les signes distinctifs représentés sur la statue du Bouddha, il est important de relever celui figurant sur sa poitrine, le svastika. C'est un symbole ancien représentant la sagesse infinie, la bonne fortune, la paix et l'éternité. Il représente le cœur du Bouddha et la connaissance. Ce signe n'a donc aucun lien avec l'usage détourné qu'en ont fait certaines organisations malveillantes par la suite dans l'histoire.",
+    ],
+    audio: "audio/3-1.mp3",
+    audioDuration: 200,
+  },
+  {
+    id: "3-2",
+    order: 8,
+    title: "Vénérable Maître Hsing Yun",
+    category: "Maître",
+    area: "Grande salle du Bouddha",
+    image: "images/3-2-hsing-yun.svg",
+    imageAlt:
+      "Illustration provisoire d'une silhouette de moine en marche avec une canne — à remplacer par la photographie de la statue du Vénérable Maître Hsing Yun.",
+    shortDescription:
+      "Fondateur de l'Ordre de Fo Guang Shan en 1967, il consacra sa vie au bouddhisme humaniste : altruisme, joie et universalité.",
+    fullText: [
+      "Vénérable Maître Hsing Yun (1927-2023) est né dans la province Chiangsu en Chine. Sa voie monastique commence à l'âge de 11 ans lorsqu'il entre dans un monastère près de Nanjing. Il reçoit l'ordination en 1941 et devient le 48ème patriarche de l'école Lin Ji. En 1949, à cause de la guerre civile, il quitte la Chine pour Taiwan où il fonde l'Ordre Monastique de Fo Guang Shan en 1967.",
+      "Il y accomplit son vœu de longue date en consacrant sa vie à offrir au monde la pratique du bouddhisme humaniste basé sur l'école de la Terre Pure du Bouddhisme Mahāyāna dont les concepts fondamentaux sont l'altruisme, la joie et l'universalité. En appliquant ces pratiques adaptées à notre époque dans la vie quotidienne, chacun peut retrouver sa nature de bouddha ici et maintenant, dans cette naissance humaine et dans ce monde. En offrant confiance, espoir, joie et confort aux autres, nous venons en aide à tous les êtres aussi bien qu'à nous-mêmes.",
+      "Maître Hsing Yun a écrit dans son testament : « Après ma dernière heure, je ne laisserai pas de śarīra (reliques) derrière moi et toutes les cérémonies compliquées sont à éviter : quelques simples mots suffiront et ceux qui penseront à moi pourront chanter les chansons de la « Collection des Voix du Monde ». Si vous avez le bouddhisme humaniste dans votre cœur et l'observez constamment, ce sera pour moi la meilleure pensée, et c'est aussi ma plus grande espérance. »",
+    ],
+    audio: "audio/3-2.mp3",
+    audioDuration: 140,
+  },
+  {
+    id: "3-3",
+    order: 9,
+    title: "Le Gong Bol",
+    category: "Instrument rituel",
+    area: "Grande salle du Bouddha",
+    image: "images/3-3-gong-bol.svg",
+    imageAlt:
+      "Illustration provisoire d'un bol et d'un maillet — à remplacer par la photographie du gong bol du temple.",
+    shortDescription:
+      "Outil sacré de signalisation et de méditation, « roi des instruments dharmiques » : il rythme les séances de méditation et les cérémonies.",
+    fullText: [
+      "Dans un temple bouddhiste, en plus d'être un instrument de musique, le gong bol est également un outil sacré de signalisation et de méditation. Sa résonance profonde purifie l'esprit et l'espace environnant. Sa forme circulaire symbolise le chemin vers la réalisation spirituelle et la sagesse. La couleur dorée du bronze évoque l'illumination.",
+      "Les vibrations du gong bol ont pour but de : dissiper les énergies négatives ; favoriser la concentration profonde ; réduire le stress ; apaiser le système nerveux.",
+      "Le gong bol rythme la vie monastique et les cérémonies en : marquant le début et la fin des séances de méditation, des repas ou des services religieux ; rappelant par le son aux moines et aux fidèles de revenir au moment présent ; donnant le rythme et la tonalité des chants par la Vénérable (maître de cérémonie) au début et pendant les cérémonies.",
+      "« Je suis connu comme le roi des instruments dharmiques, c'est ma destinée de guider par ma voix : le début ou la fin, le rythme lent ou vite d'une psalmodie ainsi que le changement d'une tonalité à une autre. » (Extrait du livre « Cloches, Gongs et Poisson en bois » de Vénérable Maître Hsing Yun)",
+    ],
+    audio: "audio/3-3.mp3",
+    audioDuration: 120,
+  },
+  {
+    id: "3-4",
+    order: 10,
+    title: "Le poisson en bois",
+    category: "Instrument rituel",
+    area: "Grande salle du Bouddha",
+    image: "images/3-4-poisson-bois.svg",
+    imageAlt:
+      "Illustration provisoire d'une forme arrondie évoquant un poisson — à remplacer par la photographie du poisson en bois du temple.",
+    shortDescription:
+      "Sculpté en bois de camphre, il rappelle aux pratiquants la vigilance constante — car le poisson ne ferme jamais les yeux.",
+    fullText: [
+      "Dans la grande salle du Bouddha, à côté de l'autel, se trouve un poisson en bois. Cet instrument de percussion est évidé et souvent fabriqué en bois de camphre. Il a la forme d'un globe sculpté avec des motifs d'écailles représentant la tête d'un poisson. On se demande pourquoi l'instrument est sculpté en forme de poisson ? Car contrairement aux humains, les poissons ne ferment jamais les yeux, même en dormant.",
+      "Par cette caractéristique, le poisson en bois rappelle aux pratiquants : la vigilance constante ; l'unité et l'harmonie.",
+      "Le poisson en bois sert à : marquer la cadence lors de la récitation des sutras et des mantras, permettant à l'assemblée de rester synchronisée ; aider l'esprit à revenir au moment présent ; marquer le début ou la fin des séances de silence ; rester concentré pendant la méditation ou les chants.",
+      "« Je suis traité avec le plus grand respect chaque jour, lorsque les moines m'utilisent pour chanter, ils me tiennent devant leurs cœurs. Lorsqu'ils ne m'utilisent pas, ils me placent soigneusement près des statues des bouddhas. Ils agissent comme si j'étais les yeux et les oreilles des êtres célestes. » (Extrait du livre « Cloches, Gongs et Poisson en bois » du Vénérable Maître Hsing Yun)",
+    ],
+    audio: "audio/3-4.mp3",
+    audioDuration: 125,
+  },
+  {
+    id: "3-5",
+    order: 11,
+    title: "Le tambour et la cloche",
+    category: "Instrument rituel",
+    area: "Grande salle du Bouddha",
+    image: "images/3-5-tambour-cloche.svg",
+    imageAlt:
+      "Illustration provisoire d'un tambour surmonté d'une petite cloche — à remplacer par la photographie du tambour et de la cloche du temple.",
+    shortDescription:
+      "Le tambour (Yang) et la cloche (Yin) rythment la vie monastique en équilibre, marquant les heures et purifiant l'espace rituel.",
+    fullText: [
+      "Le tambour est un instrument rituel majeur utilisé pour rythmer la vie monastique, accompagner les chants et symboliser l'éveil spirituel. Il marque les heures (réveil, repas, prières) et forme souvent, avec la cloche, un équilibre entre le Yang (énergie/tambour) et le Yin (sagesse/cloche).",
+      "Son battement profond symbolise la voix du Bouddha qui réveille les êtres pour qu'ils sortent de l'ignorance et de l'illusion. Les vibrations purifient l'espace et les participants engageant à la fois le corps et l'esprit dans la méditation.",
+      "Le son de la cloche purifie l'esprit et l'espace, en dissipant la négativité et en marquant le caractère sacré des zones rituelles. Il protège des énergies négatives, préparant les pratiquants à la prière et au chant.",
+    ],
+    audio: "audio/3-5.mp3",
+    audioDuration: 105,
+  },
+  {
+    id: "3-6",
+    order: 12,
+    title: "La cloche à main",
+    category: "Instrument rituel",
+    area: "Grande salle du Bouddha",
+    image: "images/3-6-cloche-main.svg",
+    imageAlt:
+      "Illustration provisoire d'une cloche à main avec son maillet — à remplacer par la photographie de la cloche à main du temple.",
+    shortDescription:
+      "Son clair et résonnant, elle appelle à la pleine conscience et rappelle l'impermanence de toutes choses.",
+    fullText: [
+      "La cloche à main, dont le son est clair et résonnant, représente le Dharma (les enseignements du Bouddha) tendant la main pour éveiller tous les êtres sensibles. Sonner la cloche signale un appel à la pleine conscience, en invitant les pratiquants à revenir au moment présent et à contempler le chemin de l'illumination.",
+      "À mesure que le son de la cloche s'élève, s'attarde, puis s'atténue, il rappelle aux bouddhistes l'impermanence et l'interdépendance de tous les phénomènes. Ce symbolisme profond qui encourage les pratiquants à apprécier chaque instant et à se libérer de leur attachement, incarne un élément central de la méditation bouddhiste.",
+      "Les cloches purifient l'esprit et l'espace en dissipant la négativité. Elles marquent le caractère sacré des zones rituelles. Leur son purifie l'environnement et protège des énergies négatives, préparant ainsi les pratiquants à la prière, au chant ou à la méditation. La voix de la cloche guide les pratiquants vers la pleine conscience, ouvre le chemin spirituel et relie à la tradition bouddhique à travers l'espace et le temps.",
+    ],
+    audio: "audio/3-6.mp3",
+    audioDuration: 110,
+  },
+  {
+    id: "3-7",
+    order: 13,
+    title: "Le Haiqing et le Man Yi",
+    category: "Vêtement rituel",
+    area: "Grande salle du Bouddha",
+    image: "images/3-7-haiqing.svg",
+    imageAlt:
+      "Illustration provisoire d'une robe ample aux larges manches — à remplacer par la photographie du Haiqing et du Man Yi.",
+    shortDescription:
+      "La robe noire Haiqing, reçue à la prise des Trois Refuges, et la robe marron Man Yi, reçue à la prise des Cinq Préceptes.",
+    fullText: [
+      "La robe Haiqing de couleur noire (Hai : océan, Qing : bleu) est obtenue suite à la cérémonie de prise des « Trois Refuges » (Bouddha, Dharma, Sangha) d'une personne qui décide de devenir bouddhiste. Elle reçoit également à cette occasion un nom dharmique. La robe est ample et longue avec de larges manches ; elle symbolise l'ouverture, la capacité de tout accueillir et la pratique de la compassion. La robe Haiqing est généralement portée par-dessus d'autres vêtements, souvent sous un kesa (manteau de moine) par les moines ou un Man Yi (robe de préceptes marron) par les laïcs pratiquants du bouddhisme Mahāyāna.",
+      "Offrant confort et dignité, la robe Haiqing (avec ou sans Man Yi) est portée lors des cérémonies, des méditations et de la récitation des sutras. Elle représente le détachement, l'égalité et la dévotion, facilitant la concentration lors des rituels. C'est un symbole de pureté, de simplicité et de respect.",
+      "La robe de préceptes Man Yi de couleur marron est reçue lors de la cérémonie de prise des « Cinq Préceptes » (s'abstenir de mentir, de voler, de tuer, d'inconduite sexuelle, de prendre des substances enivrantes) d'un laïc pratiquant du bouddhisme Mahāyāna.",
+      "« Les larges manches dansantes se meuvent avec grâce, comme les oiseaux 'océan bleu' venant de la mer de Chine. Les disciples ont l'air si gracieux et solennels lorsqu'ils me portent que depuis longtemps, on m'appelle Haiqing. » (Extrait du livre « Cloches, Gongs et Poisson en bois » du Vénérable Maître Hsing Yun)",
+    ],
+    audio: "audio/3-7.mp3",
+    audioDuration: 130,
+  },
+  {
+    id: "3-8",
+    order: 14,
+    title: "Bodhisattva Sangharama",
+    category: "Bodhisattva",
+    area: "Grande salle du Bouddha",
+    image: "images/3-8-sangharama.svg",
+    imageAlt:
+      "Illustration provisoire d'une silhouette tenant une longue hallebarde — à remplacer par la photographie de la statue du Bodhisattva Sangharama.",
+    shortDescription:
+      "Divinité protectrice du lieu de pratique, souvent associée au héros Guan Yu ; un « bouclier invisible » contre les énergies négatives.",
+    fullText: [
+      "Dans les monastères bouddhistes, le Bodhisattva Sangharama est la divinité protectrice qui veille sur le lieu de pratique et la communauté monastique. Le terme « Sangharama » est d'origine sanskrite et désigne le jardin pur où résident les moines. Son rôle est comparable à celui d'un vaillant capitaine des gardes, chargé de maintenir la paix et la justice au sein du Temple.",
+      "Dans la culture chinoise, son image est souvent associée au héros historique Guan Yu. Le Bodhisattva Sangharama assume la mission essentielle de « protecteur du Dharma ». Il agit comme un bouclier invisible pour cet espace sacré, repoussant les perturbations extérieures et les énergies négatives, afin de permettre aux pratiquants de se consacrer à leur quête spirituelle dans un environnement pur.",
+    ],
+    audio: "audio/3-8.mp3",
+    audioDuration: 100,
+  },
+  {
+    id: "3-9",
+    order: 15,
+    title: "Bodhisattva Skanda",
+    category: "Bodhisattva",
+    area: "Grande salle du Bouddha",
+    image: "images/3-9-skanda.svg",
+    imageAlt:
+      "Illustration provisoire d'une silhouette de jeune général tenant un vajra — à remplacer par la photographie de la statue du Bodhisattva Skanda.",
+    shortDescription:
+      "Général protecteur jeune et plein de vitalité, célèbre pour sa rapidité à avoir récupéré une relique dérobée du Bouddha.",
+    fullText: [
+      "Le Bodhisattva Skanda (Wei Tuo) est un général protecteur légendaire au sein du bouddhisme. Il est respectueusement appelé « Bodhisattva Vénérable Céleste Skanda, Protecteur du Dharma », et il est l'un des principaux guerriers protégeant la communauté monastique bouddhiste ainsi que la Loi juste (le Dharma).",
+      "Contrairement à la majesté solennelle et mature que l'on prête souvent aux autres divinités, le Bodhisattva Skanda est généralement représenté sous les traits d'un général beau, jeune et plein de vitalité, symbolisant une force de protection pure et limpide. Il porte une armure dorée étincelante, un casque orné d'ailes de phénix, et tient dans sa main un puissant « pilon de diamant » (Vajra).",
+      "Selon la légende, après le Parinirvana du Bouddha Shakyamuni, un démon profita de l'occasion pour dérober une relique de dent de Bouddha ; grâce à sa rapidité et son courage prodigieux, le Bodhisattva Skanda récupéra instantanément l'objet sacré. C'est pourquoi il est également considéré dans la culture populaire comme un protecteur capable de dissiper rapidement les calamités et de rétablir la justice, sa caractéristique de « célérité » étant profondément appréciée des fidèles.",
+    ],
+    audio: "audio/3-9.mp3",
+    audioDuration: 120,
+  },
+  {
+    id: "4-1",
+    order: 16,
+    title: "Bodhisattva Ksitigarbha",
+    category: "Bodhisattva",
+    area: "Salle de Ksitigarbha",
+    image: "images/4-1-ksitigarbha.svg",
+    imageAlt:
+      "Illustration provisoire d'un bâton à anneaux et d'une perle lumineuse — à remplacer par la photographie de la statue du Bodhisattva Ksitigarbha.",
+    shortDescription:
+      "« Tant que l'enfer ne sera pas vide, je jure de ne pas devenir Bouddha » : une tolérance aussi vaste que la Terre elle-même.",
+    fullText: [
+      "Le nom du Bodhisattva Ksitigarbha signifie « aussi inébranlable que la Terre et aussi profond que les pensées secrètes », symbolisant une tolérance aussi vaste et désintéressée que la Terre elle-même, ainsi qu'une sagesse infinie. L'image la plus connue du Bodhisattva Ksitigarbha est celle d'un moine vêtu d'une robe monastique et portant une coiffe Vairocana (Couronne des Cinq Bouddhas), tenant d'une main un bâton d'étain pour ouvrir les portes de l'enfer, et de l'autre une perle lumineuse pour éclairer le monde des ténèbres.",
+      "Il a autrefois fait un vœu d'une grandeur infinie : « Tant que l'enfer ne sera pas vide, je jure de ne pas devenir Bouddha ». Cela signifie que tant qu'il restera une seule âme souffrante dans le monde, il préférera renoncer à sa chance d'atteindre l'éveil pour rester dans le monde souterrain et guider les êtres vers la lumière.",
+      "Dans la salle de Ksitigarbha, de nombreuses tablettes ancestrales consacrées se trouvent aux côtés du Bodhisattva. Cela permet aux ancêtres de recevoir la protection et le baptême du Dharma dans l'au-delà, afin de se libérer de la souffrance et de trouver le bonheur. Cela offre également un espace permettant aux descendants d'exprimer leur souvenir, faisant de la salle de Ksitigarbha un havre spirituel qui relie les vivants et les morts, transmettant bénédictions et sérénité.",
+    ],
+    audio: "audio/4-1.mp3",
+    audioDuration: 135,
+  },
+];
+
+// Tri garanti par ordre de visite, au cas où le tableau ci-dessus serait
+// un jour réordonné par erreur lors d'une édition future.
+TOUR_ITEMS.sort((a, b) => a.order - b.order);
