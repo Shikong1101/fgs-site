@@ -169,7 +169,8 @@ html, body {
 #back-btn {
   position: fixed;
   bottom: 24px; right: calc(50% + 90px); /* 跟置中的「往前走」湊成一組，不再各據一角 */
-  z-index: 10000; /* 蓋過 debug-hud（z-index:9999），不然按鈕會被除錯視窗擋住看不到 */
+  z-index: 20; /* debug-hud 現在關了（SHOW_DEBUG_HUD=false），不用再蓋過 9999，
+                   降回跟 sommaire-toggle 同等級，才不會蓋住資訊卡/音檔播放器（z-index:30） */
   padding: 0.6rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--gold-soft);
