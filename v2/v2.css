@@ -212,3 +212,49 @@ html, body {
   border-radius: 4px;
 }
 .sommaire__item:hover { background: var(--stone); }
+
+/* ---------------- 手機版（螢幕寬度 ≤ 640px） ---------------- */
+@media (max-width: 640px) {
+  /* 上一步在桌面版是跟「往前走」湊一組、用 calc(50%+90px) 定位，
+     但這個公式在窄螢幕上會讓按鈕整個被推出左邊界（實測 375px 寬的手機
+     大概有一半的按鈕跑到螢幕外面，點不到）。手機版改成回到左下角單獨一顆，
+     跟置中的「往前走」、右邊的分岔按鈕三個分開，互不重疊。 */
+  #back-btn {
+    left: 12px; right: auto; bottom: 12px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  #sommaire-toggle, #lang-toggle {
+    top: 12px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  #sommaire-toggle { left: 12px; }
+  #lang-toggle { right: 12px; }
+
+  /* 出口按鈕：手機版文字容易比按鈕寬（例如「左轉下樓」這種長標籤），
+     加上 max-width + 允許換行，不然文字會被硬擠成一長條、甚至超出螢幕。 */
+  .scene-exit {
+    bottom: 12px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    max-width: 42vw;
+    white-space: normal;
+    line-height: 1.25;
+    text-align: center;
+  }
+  .scene-exit--advance { max-width: 55vw; }
+  .scene-exit--branch { right: 12px; }
+
+  /* 光點觸控目標加大：36px 對手指來說偏小，Apple/Google 的建議最小觸控
+     尺寸都是 44px，這裡加大但視覺上的點（.hotspot-dot）維持原本比例，
+     只是可點擊的判定範圍變大，比較不會點不準。 */
+  .hotspot { width: 44px; height: 44px; }
+
+  .info-panel { padding: 1.2rem 1rem; }
+  .info-panel__close { top: 0.7rem; right: 0.7rem; width: 32px; height: 32px; }
+
+  #sommaire-slot { width: min(280px, 88%); }
+  .sommaire { padding: 4rem 0.9rem 2rem; }
+}
