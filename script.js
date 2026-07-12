@@ -736,7 +736,8 @@
   }
 
   function initSearch() {
-    $("#search-open-btn").addEventListener("click", openSearch);
+    const openBtn = $("#search-open-btn"); // 上排 nav 那顆已經拿掉了，這裡加個防呆，不要讓整個 initSearch 掛掉
+    if (openBtn) openBtn.addEventListener("click", openSearch);
     $("#hero-search-btn").addEventListener("click", openSearch);
     $("#search-close-btn").addEventListener("click", closeSearch);
     $("#search-modal-backdrop").addEventListener("click", closeSearch);
