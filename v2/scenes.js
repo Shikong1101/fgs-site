@@ -43,7 +43,7 @@ const SCENES = [
     hotspots: [],
     exits: [
       { type: "advance", toSceneId: "hall-gate-near", label: "Vers l'entrée", label_en: "Towards the entrance" },
-      { type: "branch", toSceneId: "left-1", label: "Aile gauche", label_en: "Left wing" },
+      { type: "branch", toSceneId: "left-1", label: "Aile gauche", label_en: "Left wing", side: "left" },
       { type: "branch", toSceneId: "right-1", label: "Aile droite", label_en: "Right wing" },
     ],
   },
