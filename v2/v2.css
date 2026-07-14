@@ -107,7 +107,7 @@ html, body {
   cursor: pointer;
   z-index: 5;
 }
-.scene-exit--advance { left: 50%; transform: translateX(-50%); }
+.scene-exit--advance { left: calc(50% + 60px); transform: translateX(-50%); } /* 往右挪一點，讓「上一步＋往前走」這一組整體看起來置中 */
 .scene-exit--branch { right: 24px; }
 .scene-exit--branch-left { left: 24px; right: auto; } /* 左邊分岔按鈕放到畫面左側，跟右邊分岔分開，不要疊在同一角 */
 
@@ -170,7 +170,7 @@ html, body {
 }
 #back-btn {
   position: fixed;
-  bottom: 24px; right: calc(50% + 135px); /* 跟置中的「往前走」湊成一組；往前走又變更大了，間距再加寬一點 */
+  bottom: 24px; right: calc(50% + 75px); /* 跟置中的「往前走」湊成一組；往前走往右挪了 60px，這裡跟著調整維持原本間距 */
   z-index: 20; /* debug-hud 現在關了（SHOW_DEBUG_HUD=false），不用再蓋過 9999，
                    降回跟 sommaire-toggle 同等級，才不會蓋住資訊卡/音檔播放器（z-index:30） */
   padding: 1rem 1.8rem;
