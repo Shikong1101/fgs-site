@@ -483,9 +483,14 @@ class SceneStage {
       scene.hotspots.forEach((h) => toEl.appendChild(renderHotspot(h, this.onHotspotClick)));
     }
     // branch 型出口如果同時有多個，垂直往上疊開，避免疊在同一個位置點不到
-    let branchIndex = 0;
+    // 左邊分岔（side:"left"）跟右邊分岔各自獨立疊放，不共用同一組計數
+    let branchIndexLeft = 0, branchIndexRight = 0;
     scene.exits.forEach((exit) => {
-      const el = this._renderExit(exit, exit.type === "branch" ? branchIndex++ : 0);
+      let branchIndex = 0;
+      if (exit.type === "branch") {
+        branchIndex = exit.side === "left" ? branchIndexLeft++ : branchIndexRight++;
+      }
+      const el = this._renderExit(exit, branchIndex);
       toEl.appendChild(el);
     });
 
@@ -528,6 +533,7 @@ class SceneStage {
   _renderExit(exit, branchIndex) {
     const el = document.createElement("button");
     el.className = `scene-exit scene-exit--${exit.type}`;
+    if (exit.type === "branch" && exit.side === "left") el.classList.add("scene-exit--branch-left");
     el.textContent = exit.type === "branch" ? `↗ ${tItem(exit, "label")}` : `↑ ${tItem(exit, "label")}`;
     if (exit.type === "branch") {
       el.style.bottom = (24 + branchIndex * 80) + "px"; // 多個 branch 垂直往上疊開，按鈕變大了所以間距也加大，避免疊在一起

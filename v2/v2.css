@@ -97,18 +97,19 @@ html, body {
 .scene-exit {
   position: absolute;
   bottom: 24px;
-  padding: 0.85rem 1.5rem;
+  padding: 1rem 1.8rem;
   border-radius: 999px;
-  border: 1.5px solid var(--gold-soft);
+  border: 2px solid var(--gold-soft);
   background: rgba(58, 42, 30, 0.75);
   color: var(--paper);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   cursor: pointer;
   z-index: 5;
 }
 .scene-exit--advance { left: 50%; transform: translateX(-50%); }
 .scene-exit--branch { right: 24px; }
+.scene-exit--branch-left { left: 24px; right: auto; } /* 左邊分岔按鈕放到畫面左側，跟右邊分岔分開，不要疊在同一角 */
 
 /* ---------------- 資訊卡 InfoPanel ---------------- */
 #info-panel-slot {
@@ -169,15 +170,15 @@ html, body {
 }
 #back-btn {
   position: fixed;
-  bottom: 24px; right: calc(50% + 115px); /* 跟置中的「往前走」湊成一組；往前走變大了，這裡的間距也跟著加寬避免擠在一起 */
+  bottom: 24px; right: calc(50% + 135px); /* 跟置中的「往前走」湊成一組；往前走又變更大了，間距再加寬一點 */
   z-index: 20; /* debug-hud 現在關了（SHOW_DEBUG_HUD=false），不用再蓋過 9999，
                    降回跟 sommaire-toggle 同等級，才不會蓋住資訊卡/音檔播放器（z-index:30） */
-  padding: 0.85rem 1.5rem;
+  padding: 1rem 1.8rem;
   border-radius: 999px;
-  border: 1.5px solid var(--gold-soft);
+  border: 2px solid var(--gold-soft);
   background: rgba(58, 42, 30, 0.75);
   color: var(--paper);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -249,6 +250,7 @@ html, body {
   }
   .scene-exit--advance { max-width: 55vw; }
   .scene-exit--branch { right: 12px; }
+  .scene-exit--branch-left { left: 12px; right: auto; }
 
   /* 光點觸控目標加大：36px 對手指來說偏小，Apple/Google 的建議最小觸控
      尺寸都是 44px，這裡加大但視覺上的點（.hotspot-dot）維持原本比例，
