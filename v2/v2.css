@@ -97,12 +97,13 @@ html, body {
 .scene-exit {
   position: absolute;
   bottom: 24px;
-  padding: 0.6rem 1.1rem;
+  padding: 0.85rem 1.5rem;
   border-radius: 999px;
-  border: 1px solid var(--gold-soft);
+  border: 1.5px solid var(--gold-soft);
   background: rgba(58, 42, 30, 0.75);
   color: var(--paper);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
   z-index: 5;
 }
@@ -168,14 +169,16 @@ html, body {
 }
 #back-btn {
   position: fixed;
-  bottom: 24px; right: calc(50% + 90px); /* 跟置中的「往前走」湊成一組，不再各據一角 */
+  bottom: 24px; right: calc(50% + 115px); /* 跟置中的「往前走」湊成一組；往前走變大了，這裡的間距也跟著加寬避免擠在一起 */
   z-index: 20; /* debug-hud 現在關了（SHOW_DEBUG_HUD=false），不用再蓋過 9999，
                    降回跟 sommaire-toggle 同等級，才不會蓋住資訊卡/音檔播放器（z-index:30） */
-  padding: 0.6rem 1rem;
+  padding: 0.85rem 1.5rem;
   border-radius: 999px;
-  border: 1px solid var(--gold-soft);
+  border: 1.5px solid var(--gold-soft);
   background: rgba(58, 42, 30, 0.75);
   color: var(--paper);
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
 }
 #back-btn[hidden] { display: none; }

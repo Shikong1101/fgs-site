@@ -530,7 +530,7 @@ class SceneStage {
     el.className = `scene-exit scene-exit--${exit.type}`;
     el.textContent = exit.type === "branch" ? `↗ ${tItem(exit, "label")}` : `↑ ${tItem(exit, "label")}`;
     if (exit.type === "branch") {
-      el.style.bottom = (24 + branchIndex * 60) + "px"; // 多個 branch 垂直往上疊開
+      el.style.bottom = (24 + branchIndex * 80) + "px"; // 多個 branch 垂直往上疊開，按鈕變大了所以間距也加大，避免疊在一起
     }
     el.addEventListener("click", () => {
       debugLog("★ exit CLICK：" + exit.toSceneId + "（" + exit.type + (exit.reset ? "／reset" : "") + "）");
