@@ -83,7 +83,7 @@ const TOUR_ITEMS = [
       "La statue du Bouddha Maitreya le représente la tête légèrement inclinée vers le bas pour regarder le monde depuis le ciel et toujours souriant. Il est assis avec l'un de ses pieds reposant sur le sol, indiquant qu'il se prépare à se lever et à descendre sur terre en tant que prochain Bouddha.",
     ],
     audio: "audio/1-1.mp3",
-    audioDuration: 95,
+    audioDuration: 74,
   },
   {
     id: "1-2",
@@ -103,7 +103,7 @@ const TOUR_ITEMS = [
       "La sixième bande verticale reprend ces cinq couleurs dans le même ordre et disposées verticalement. Le spectre de l'aura du Bouddha Shakyamuni est un mélange de couleurs désigné sous le nom de Prabashvara « d'un éclat suprême ou l'essence de la lumière » et est lié à la grande joie ou félicité (en sanskrit Pra : préfixe signifiant intensément, éclatant ; Bhāsvara : brillant, lumineux, resplendissant, dérivé de la racine bhās signifiant briller, luire).",
     ],
     audio: "audio/1-2.mp3",
-    audioDuration: 110,
+    audioDuration: 85,
   },
   {
     id: "1-3",
@@ -122,7 +122,7 @@ const TOUR_ITEMS = [
       "Malgré cet avertissement, à son arrivée au palais, Song Yun rapporte à l'empereur qu'il a rencontré Bodhidharma en chemin. L'empereur déclare alors que Bodhidharma est déjà mort et enterré, puis il fait arrêter Song Yun pour avoir menti. Au monastère de Shaolin, les moines confirment que Bodhidharma est décédé et a été enterré dans une colline derrière le temple. La tombe est réouverte et on n'y trouve le corps du défunt Bodhidharma avec une seule chaussure. Les moines s'exclament alors : « Le Maître est rentré chez lui ! » et ils se prosternent trois fois.",
     ],
     audio: "audio/1-3.mp3",
-    audioDuration: 130,
+    audioDuration: 103,
   },
   {
     id: "1-4",
@@ -140,7 +140,7 @@ const TOUR_ITEMS = [
       "Le cercle représente la Terre, la fleur de lotus symbolise la transcendance. La Terre représente le monde ordinaire, tandis que la fleur de lotus symbolise le monde immortel et pur transcendant la suprême vérité. Nous devons les associer de sorte que la clarté et la pureté de la fleur de lotus se reflètent sur cette Terre pour qu'elle devienne le monde le plus parfait de l'univers. Cela symbolise la non-dualité entre le mondain et l'extra-mondain, permettant à notre monde de devenir un royaume du Dharma. La pureté de la fleur de lotus permet à la Terre entière de se transcender et de devenir une Terre Pure mondaine.",
     ],
     audio: "audio/1-4.mp3",
-    audioDuration: 100,
+    audioDuration: 74,
   },
   {
     id: "2-1",
@@ -159,7 +159,7 @@ const TOUR_ITEMS = [
       "Le mantra de six syllabes du Bodhisattva Avalokiteshvara est le mantra le plus connu et récité : Om Maṇi Padme Hum.",
     ],
     audio: "audio/2-1.mp3",
-    audioDuration: 115,
+    audioDuration: 74,
   },
   {
     id: "2-2",
@@ -178,7 +178,7 @@ const TOUR_ITEMS = [
       "Action juste : éviter toute action malsaine en respectant les cinq préceptes. Parole juste : ne pas mentir, ne pas semer la discorde ou la désunion, ne pas tenir un langage grossier, ne pas bavarder oisivement. Moyens d'existence justes : subvenir à ses besoins en exerçant une profession honnête et convenable ne nuisant pas aux autres. Effort juste ou persévérance juste : entreprendre ce qui est favorable et vaincre ce qui est défavorable. Attention juste : pleine conscience ou prise de conscience juste des choses, de soi, des autres, de la réalité, conformément au juste Dharma. Concentration juste : se focaliser mentalement sur un seul objet comme la respiration en méditation pour atteindre le calme et la paix de l'esprit. Compréhension juste : comprendre la réalité, les « Quatre Nobles Vérités ». Pensée juste : motivation juste, discernement dénué des « Trois Poisons » que sont la colère, l'avidité et l'ignorance.",
     ],
     audio: "audio/2-2.mp3",
-    audioDuration: 150,
+    audioDuration: 99,
   },
   {
     id: "3-1",
@@ -199,7 +199,7 @@ const TOUR_ITEMS = [
       "Parmi tous les signes distinctifs représentés sur la statue du Bouddha, il est important de relever celui figurant sur sa poitrine, le svastika. C'est un symbole ancien représentant la sagesse infinie, la bonne fortune, la paix et l'éternité. Il représente le cœur du Bouddha et la connaissance. Ce signe n'a donc aucun lien avec l'usage détourné qu'en ont fait certaines organisations malveillantes par la suite dans l'histoire.",
     ],
     audio: "audio/3-1.mp3",
-    audioDuration: 200,
+    audioDuration: 152,
   },
   {
     id: "3-2",
@@ -218,7 +218,7 @@ const TOUR_ITEMS = [
       "Maître Hsing Yun a écrit dans son testament : « Après ma dernière heure, je ne laisserai pas de śarīra (reliques) derrière moi et toutes les cérémonies compliquées sont à éviter : quelques simples mots suffiront et ceux qui penseront à moi pourront chanter les chansons de la « Collection des Voix du Monde ». Si vous avez le bouddhisme humaniste dans votre cœur et l'observez constamment, ce sera pour moi la meilleure pensée, et c'est aussi ma plus grande espérance. »",
     ],
     audio: "audio/3-2.mp3",
-    audioDuration: 140,
+    audioDuration: 84,
   },
   {
     id: "3-3",
@@ -238,7 +238,7 @@ const TOUR_ITEMS = [
       "« Je suis connu comme le roi des instruments dharmiques, c'est ma destinée de guider par ma voix : le début ou la fin, le rythme lent ou vite d'une psalmodie ainsi que le changement d'une tonalité à une autre. » (Extrait du livre « Cloches, Gongs et Poisson en bois » de Vénérable Maître Hsing Yun)",
     ],
     audio: "audio/3-3.mp3",
-    audioDuration: 120,
+    audioDuration: 66,
   },
   {
     id: "3-4",
@@ -258,7 +258,7 @@ const TOUR_ITEMS = [
       "« Je suis traité avec le plus grand respect chaque jour, lorsque les moines m'utilisent pour chanter, ils me tiennent devant leurs cœurs. Lorsqu'ils ne m'utilisent pas, ils me placent soigneusement près des statues des bouddhas. Ils agissent comme si j'étais les yeux et les oreilles des êtres célestes. » (Extrait du livre « Cloches, Gongs et Poisson en bois » du Vénérable Maître Hsing Yun)",
     ],
     audio: "audio/3-4.mp3",
-    audioDuration: 125,
+    audioDuration: 68,
   },
   {
     id: "3-5",
@@ -277,7 +277,7 @@ const TOUR_ITEMS = [
       "Le son de la cloche purifie l'esprit et l'espace, en dissipant la négativité et en marquant le caractère sacré des zones rituelles. Il protège des énergies négatives, préparant les pratiquants à la prière et au chant.",
     ],
     audio: "audio/3-5.mp3",
-    audioDuration: 105,
+    audioDuration: 47,
   },
   {
     id: "3-6",
@@ -296,7 +296,7 @@ const TOUR_ITEMS = [
       "Les cloches purifient l'esprit et l'espace en dissipant la négativité. Elles marquent le caractère sacré des zones rituelles. Leur son purifie l'environnement et protège des énergies négatives, préparant ainsi les pratiquants à la prière, au chant ou à la méditation. La voix de la cloche guide les pratiquants vers la pleine conscience, ouvre le chemin spirituel et relie à la tradition bouddhique à travers l'espace et le temps.",
     ],
     audio: "audio/3-6.mp3",
-    audioDuration: 110,
+    audioDuration: 60,
   },
   {
     id: "3-7",
@@ -316,7 +316,7 @@ const TOUR_ITEMS = [
       "« Les larges manches dansantes se meuvent avec grâce, comme les oiseaux 'océan bleu' venant de la mer de Chine. Les disciples ont l'air si gracieux et solennels lorsqu'ils me portent que depuis longtemps, on m'appelle Haiqing. » (Extrait du livre « Cloches, Gongs et Poisson en bois » du Vénérable Maître Hsing Yun)",
     ],
     audio: "audio/3-7.mp3",
-    audioDuration: 130,
+    audioDuration: 89,
   },
   {
     id: "3-8",
@@ -334,7 +334,7 @@ const TOUR_ITEMS = [
       "Dans la culture chinoise, son image est souvent associée au héros historique Guan Yu. Le Bodhisattva Sangharama assume la mission essentielle de « protecteur du Dharma ». Il agit comme un bouclier invisible pour cet espace sacré, repoussant les perturbations extérieures et les énergies négatives, afin de permettre aux pratiquants de se consacrer à leur quête spirituelle dans un environnement pur.",
     ],
     audio: "audio/3-8.mp3",
-    audioDuration: 100,
+    audioDuration: 46,
   },
   {
     id: "3-9",
@@ -353,7 +353,7 @@ const TOUR_ITEMS = [
       "Selon la légende, après le Parinirvana du Bouddha Shakyamuni, un démon profita de l'occasion pour dérober une relique de dent de Bouddha ; grâce à sa rapidité et son courage prodigieux, le Bodhisattva Skanda récupéra instantanément l'objet sacré. C'est pourquoi il est également considéré dans la culture populaire comme un protecteur capable de dissiper rapidement les calamités et de rétablir la justice, sa caractéristique de « célérité » étant profondément appréciée des fidèles.",
     ],
     audio: "audio/3-9.mp3",
-    audioDuration: 120,
+    audioDuration: 70,
   },
   {
     id: "4-1",
@@ -372,7 +372,7 @@ const TOUR_ITEMS = [
       "Dans la salle de Ksitigarbha, de nombreuses tablettes ancestrales consacrées se trouvent aux côtés du Bodhisattva. Cela permet aux ancêtres de recevoir la protection et le baptême du Dharma dans l'au-delà, afin de se libérer de la souffrance et de trouver le bonheur. Cela offre également un espace permettant aux descendants d'exprimer leur souvenir, faisant de la salle de Ksitigarbha un havre spirituel qui relie les vivants et les morts, transmettant bénédictions et sérénité.",
     ],
     audio: "audio/4-1.mp3",
-    audioDuration: 135,
+    audioDuration: 73,
   },
 ];
 
