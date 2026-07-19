@@ -4,8 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>佛光山日內瓦道場 — 網站內容後台</title>
-  <!-- Decap CMS 本體，直接從官方 CDN 載入，不用自己安裝任何東西 -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Decap CMS 本體，直接從官方 CDN 載入，不用自己安裝任何東西
+       鎖死成固定版本 3.14.1（不用 ^3.0.0 這種浮動版本號），
+       避免 CDN 抓到子套件之間版本兜不起來、直接白屏的狀況 -->
+  <script src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"></script>
 </head>
 <body>
   <!-- Decap CMS 會自動接管這個頁面，畫面內容由它產生，不需要另外寫 HTML -->
