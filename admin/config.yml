@@ -7,7 +7,7 @@ backend:
 
 # 每次存檔前，Decap 會先跳出「這則變更的內容 vs 原本內容」給你確認，
 # 避免手滑存錯、或忘記自己改了什麼。
-publish_mode: editorial_workflow
+
 
 media_folder: "images"   # 上傳圖片時，檔案會被放進這個資料夾
 public_folder: "images"  # 網頁上圖片路徑的對應寫法
