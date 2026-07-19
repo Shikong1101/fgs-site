@@ -2,7 +2,7 @@ backend:
   name: github
   repo: shikong1101/fgs-site   # ← 改成實際的 GitHub 帳號/repo 名稱
   branch: main
-  base_url: https://YOUR-OAUTH-PROXY-DOMAIN   # ← 部署好 OAuth 代理伺服器後，把網址貼在這裡
+  base_url: https://fragrant-truth-4410.renweizhang23.workers.dev   # ← 部署好 OAuth 代理伺服器後，把網址貼在這裡
   auth_endpoint: auth
 
 # 每次存檔前，Decap 會先跳出「這則變更的內容 vs 原本內容」給你確認，
