@@ -1,0 +1,52 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration du temple, à remplacer par une photographie du lieu">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F2E9D6"/>
+      <stop offset="55%" stop-color="#F6F1E7"/>
+      <stop offset="100%" stop-color="#E9E0CC"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E9B96A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#E9B96A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1180" cy="300" r="230" fill="url(#glow)"/>
+  <circle cx="1180" cy="300" r="92" fill="#F6F1E7" stroke="#D8A646" stroke-width="3" opacity="0.9"/>
+
+  <!-- distant hill line -->
+  <path d="M0,560 Q400,500 800,545 T1600,520 V900 H0 Z" fill="#E3D8BC" opacity="0.7"/>
+
+  <!-- ground -->
+  <rect x="0" y="640" width="1600" height="260" fill="#DCD0AE" opacity="0.55"/>
+
+  <!-- temple silhouette: three-tier roof, simple and calm -->
+  <g fill="#3E2C22">
+    <path d="M520,640 L800,640 L760,600 L560,600 Z"/>
+    <path d="M540,600 L780,600 L745,565 L575,565 Z"/>
+    <path d="M560,565 L760,565 L730,535 L590,535 Z"/>
+    <rect x="595" y="640" width="130" height="120" />
+    <rect x="650" y="700" width="20" height="60" fill="#F6F1E7"/>
+    <path d="M500,645 q160,-26 320,0 l-10,18 q-150,-22 -300,0 Z" opacity="0.9"/>
+    <path d="M520,605 q140,-22 280,0 l-9,16 q-131,-19 -262,0 Z" opacity="0.9"/>
+    <path d="M545,570 q120,-18 240,0 l-8,14 q-112,-16 -224,0 Z" opacity="0.9"/>
+  </g>
+
+  <!-- lanterns either side, simple shapes -->
+  <g fill="#B8862E" opacity="0.85">
+    <rect x="420" y="700" width="14" height="60" rx="4"/>
+    <ellipse cx="427" cy="690" rx="16" ry="20"/>
+    <rect x="860" y="700" width="14" height="60" rx="4"/>
+    <ellipse cx="867" cy="690" rx="16" ry="20"/>
+  </g>
+
+  <!-- five-colour ribbon along the horizon, echoing the drapeau bouddhique (fiche 1-2) -->
+  <g>
+    <rect x="0" y="858" width="320" height="10" fill="#1E3A5F"/>
+    <rect x="320" y="858" width="320" height="10" fill="#E8B93B"/>
+    <rect x="640" y="858" width="320" height="10" fill="#B33A3A"/>
+    <rect x="960" y="858" width="320" height="10" fill="#F6F1E7"/>
+    <rect x="1280" y="858" width="320" height="10" fill="#D98A3D"/>
+  </g>
+</svg>

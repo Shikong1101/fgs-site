@@ -1,0 +1,13 @@
+<svg viewBox="0 0 240 248" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="La cloche à main">
+  <title>La cloche à main</title>
+  <circle cx="120" cy="112" r="100" fill="#F6F1E7" stroke="#3E2C22" stroke-width="3"/>
+  <circle cx="120" cy="112" r="93" fill="none" stroke="#B8862E" stroke-width="1.5" opacity="0.7"/>
+  <g transform="translate(120,100)">
+    <path d="M-22,-4 Q-22,-26 0,-26 Q22,-26 22,-4 Z" fill="none" stroke="#3E2C22" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="-22" y1="-4" x2="22" y2="-4" stroke="#3E2C22" stroke-width="4"/>
+        <rect x="-5" y="-4" width="10" height="38" rx="4" fill="none" stroke="#3E2C22" stroke-width="4"/>
+        <path d="M-30,-30 q4,-8 0,-16" fill="none" stroke="#B8862E" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <path d="M30,-30 q-4,-8 0,-16" fill="none" stroke="#B8862E" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  </g>
+  <rect x="55.00" y="222" width="26.00" height="12" fill="#1E3A5F" stroke="#FFFFFF" stroke-width="0.4"/><rect x="81.00" y="222" width="26.00" height="12" fill="#E8B93B" stroke="#FFFFFF" stroke-width="0.4"/><rect x="107.00" y="222" width="26.00" height="12" fill="#B33A3A" stroke="#FFFFFF" stroke-width="0.4"/><rect x="133.00" y="222" width="26.00" height="12" fill="#F6F1E7" stroke="#FFFFFF" stroke-width="0.4"/><rect x="159.00" y="222" width="26.00" height="12" fill="#D98A3D" stroke="#FFFFFF" stroke-width="0.4"/>
+</svg>
