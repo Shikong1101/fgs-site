@@ -260,26 +260,37 @@ function renderHotspot(hotspot, onClick) {
 // 座標。這樣同一組 hotspot 資料在任何螢幕比例下都準，不用為手機
 // 另外重新標一次座標。
 // ============================================================
-function getCoverOffset(containerW, containerH, naturalW, naturalH) {
+// posXPercent/posYPercent 對應 CSS object-position 的用法：50 是預設置中，
+// 0 是貼左（露出圖片左半部本來被裁掉的內容），100 是貼右。目前只做水平拖曳，
+// 所以 posYPercent 固定傳 50，垂直方向維持原本置中不變。
+function getCoverOffset(containerW, containerH, naturalW, naturalH, posXPercent, posYPercent) {
   if (!naturalW || !naturalH || !containerW || !containerH) return null;
+  const px = posXPercent == null ? 50 : posXPercent;
+  const py = posYPercent == null ? 50 : posYPercent;
   const scale = Math.max(containerW / naturalW, containerH / naturalH);
   const displayW = naturalW * scale;
   const displayH = naturalH * scale;
   return {
-    offsetX: (containerW - displayW) / 2,
-    offsetY: (containerH - displayH) / 2,
+    offsetX: (containerW - displayW) * (px / 100),
+    offsetY: (containerH - displayH) * (py / 100),
     displayW,
     displayH,
   };
 }
 
-/** 依照某個 stage 容器目前的實際尺寸＋圖片原始比例，重新定位裡面所有 hotspot */
-function positionHotspotsForStage(stageEl) {
+/**
+ * 依照某個 stage 容器目前的實際尺寸＋圖片原始比例，重新定位裡面所有 hotspot，
+ * 同時把 posXPercent 套到圖片本身的 object-position，讓圖片跟光點一起平移。
+ * posXPercent 沒傳的話，用這個 stage 目前記錄的拖曳位置（沒拖過就是 50 置中）。
+ */
+function positionHotspotsForStage(stageEl, posXPercent) {
   if (!stageEl) return;
+  const px = posXPercent == null ? (stageEl._panState ? stageEl._panState.panX : 50) : posXPercent;
   const img = stageEl.querySelector(".scene-stage__image");
   if (!img || !img.naturalWidth || !img.naturalHeight) return;
-  const rect = getCoverOffset(stageEl.clientWidth, stageEl.clientHeight, img.naturalWidth, img.naturalHeight);
+  const rect = getCoverOffset(stageEl.clientWidth, stageEl.clientHeight, img.naturalWidth, img.naturalHeight, px, 50);
   if (!rect) return;
+  img.style.objectPosition = `${px}% 50%`;
   stageEl.querySelectorAll(".hotspot").forEach((btn) => {
     const x = parseFloat(btn.dataset.x);
     const y = parseFloat(btn.dataset.y);
@@ -287,6 +298,61 @@ function positionHotspotsForStage(stageEl) {
     btn.style.left = `${rect.offsetX + x * rect.displayW}px`;
     btn.style.top = `${rect.offsetY + y * rect.displayH}px`;
   });
+}
+
+/** 這張圖在目前容器比例下，左右總共有多少 px 是 cover 裁掉、可以拖出來看的範圍 */
+function maxPanTravelPx(stageEl, img) {
+  if (!stageEl || !img || !img.naturalWidth) return 0;
+  const rect = getCoverOffset(stageEl.clientWidth, stageEl.clientHeight, img.naturalWidth, img.naturalHeight);
+  if (!rect) return 0;
+  return Math.max(0, rect.displayW - stageEl.clientWidth);
+}
+
+/**
+ * 讓某個 stage 容器可以左右拖曳／滑動，看到目前這張照片被 cover 裁掉的左右兩側。
+ * 只掛一次監聽在 stageEl 上（stageA/stageB 各掛一次，不是每次換場景都掛），
+ * 實際操作哪張圖、目前拖到哪裡，靠 stageEl._panState 這個每次 _render() 都會
+ * 重新指到新 img 的物件來判斷，避免場景一直換、監聽器越疊越多。
+ */
+function initPanForStage(stageEl) {
+  let dragging = false;
+  let moved = false;
+  let dragStartClientX = 0;
+  let dragStartPanX = 50;
+
+  stageEl.addEventListener("pointerdown", (e) => {
+    const s = stageEl._panState;
+    if (!s || maxPanTravelPx(stageEl, s.img) <= 0) return;
+    dragging = true;
+    moved = false;
+    dragStartClientX = e.clientX;
+    dragStartPanX = s.panX;
+  });
+
+  stageEl.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const s = stageEl._panState;
+    if (!s) return;
+    const travel = maxPanTravelPx(stageEl, s.img);
+    if (travel <= 0) return;
+    const dx = e.clientX - dragStartClientX;
+    if (Math.abs(dx) > 4) moved = true;
+    // 手指／滑鼠往右拖（dx > 0）＝想看左邊被裁掉的畫面，所以 panX 要變小
+    const percentPerPx = 100 / travel;
+    s.panX = Math.min(100, Math.max(0, dragStartPanX - dx * percentPerPx));
+    positionHotspotsForStage(stageEl, s.panX);
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    if (moved) {
+      // 剛剛是拖曳不是點擊，攔截接下來這一次 click，避免放開時誤觸到光點/出口
+      stageEl.addEventListener("click", (ev) => ev.stopPropagation(), { capture: true, once: true });
+    }
+  }
+  window.addEventListener("pointerup", endDrag);
+  window.addEventListener("pointercancel", endDrag);
 }
 
 // ============================================================
@@ -512,6 +578,10 @@ class SceneStage {
 
     engine.on("scene:change", ({ scene, transitionType }) => this._render(scene, transitionType));
 
+    // 左右拖曳監聽只掛一次在這兩個固定的 stage 容器上，不是每次換場景都掛，
+    // 實際狀態靠 _render() 每次重設的 stageEl._panState 來判斷
+    this.stages.forEach((s) => initPanForStage(s));
+
     // 螢幕尺寸或方向改變時（換手機直向/橫向、桌機縮放視窗...），
     // 重新換算目前顯示中那個 stage 的 hotspot 位置
     let resizeTimer = null;
@@ -532,9 +602,12 @@ class SceneStage {
     toEl.innerHTML = "";
     const img = document.createElement("img");
     img.className = "scene-stage__image";
+    img.draggable = false;
     img.src = scene.image;
     img.alt = tItem(scene, "label");
     toEl.appendChild(img);
+    // 新場景一律從置中（50）開始，不沿用上一張圖拖到哪裡
+    toEl._panState = { img, panX: 50 };
 
     if (SHOW_HOTSPOTS) {
       scene.hotspots.forEach((h) => toEl.appendChild(renderHotspot(h, this.onHotspotClick)));

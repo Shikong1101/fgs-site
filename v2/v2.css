@@ -67,7 +67,11 @@ html, body {
   user-select: none;
   -webkit-user-drag: none;
   will-change: transform;
+  /* 讓瀏覽器把左右拖曳交給我們自己的邏輯處理，不要被當成滑動手勢／邊緣返回手勢搶走 */
+  touch-action: none;
+  cursor: grab;
 }
+.scene-stage__image:active { cursor: grabbing; }
 
 /* ---------------- 光點 ---------------- */
 .hotspot {
