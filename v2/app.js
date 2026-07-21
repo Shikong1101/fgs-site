@@ -231,6 +231,10 @@ function renderHotspot(hotspot, onClick) {
   const item = TOUR_ITEMS.find((i) => i.id === hotspot.tourItemId);
   const el = document.createElement("button");
   el.className = "hotspot";
+  el.dataset.x = hotspot.x;
+  el.dataset.y = hotspot.y;
+  // 先用百分比當保底定位（圖片還沒載完、或算不出 naturalWidth 時用這個），
+  // 圖片 load 完後會被 positionHotspotsForStage() 換算成精確的像素座標覆蓋掉
   el.style.left = `${hotspot.x * 100}%`;
   el.style.top = `${hotspot.y * 100}%`;
   el.setAttribute("aria-label", item ? `查看：${tItem(item, "title")}` : hotspot.tourItemId);
@@ -240,6 +244,49 @@ function renderHotspot(hotspot, onClick) {
     onClick(hotspot.tourItemId);
   });
   return el;
+}
+
+// ============================================================
+// object-fit: cover 座標換算
+// ------------------------------------------------------------
+// 問題：.hotspot 用 left/top 百分比定位，但那是相對「容器」算的；
+// 圖片是用 object-fit: cover 貼滿容器，容器跟圖片比例不同時裁切範圍
+// 就不同（桌機螢幕比例接近拍照比例，裁得少，位置對得上；手機直向螢幕
+// 裁得多，同樣的百分比就會跟畫面內容對不上）。
+//
+// 解法：等圖片 naturalWidth/naturalHeight 拿得到之後，自己算一次
+// object-fit: cover 實際會把圖片放大／置中裁切到容器裡的哪個範圍，
+// 再把 hotspot 原本「相對整張原圖」的 x,y（0~1）換算成容器內的像素
+// 座標。這樣同一組 hotspot 資料在任何螢幕比例下都準，不用為手機
+// 另外重新標一次座標。
+// ============================================================
+function getCoverOffset(containerW, containerH, naturalW, naturalH) {
+  if (!naturalW || !naturalH || !containerW || !containerH) return null;
+  const scale = Math.max(containerW / naturalW, containerH / naturalH);
+  const displayW = naturalW * scale;
+  const displayH = naturalH * scale;
+  return {
+    offsetX: (containerW - displayW) / 2,
+    offsetY: (containerH - displayH) / 2,
+    displayW,
+    displayH,
+  };
+}
+
+/** 依照某個 stage 容器目前的實際尺寸＋圖片原始比例，重新定位裡面所有 hotspot */
+function positionHotspotsForStage(stageEl) {
+  if (!stageEl) return;
+  const img = stageEl.querySelector(".scene-stage__image");
+  if (!img || !img.naturalWidth || !img.naturalHeight) return;
+  const rect = getCoverOffset(stageEl.clientWidth, stageEl.clientHeight, img.naturalWidth, img.naturalHeight);
+  if (!rect) return;
+  stageEl.querySelectorAll(".hotspot").forEach((btn) => {
+    const x = parseFloat(btn.dataset.x);
+    const y = parseFloat(btn.dataset.y);
+    if (Number.isNaN(x) || Number.isNaN(y)) return;
+    btn.style.left = `${rect.offsetX + x * rect.displayW}px`;
+    btn.style.top = `${rect.offsetY + y * rect.displayH}px`;
+  });
 }
 
 // ============================================================
@@ -464,6 +511,16 @@ class SceneStage {
     this.onHotspotClick = onHotspotClick;
 
     engine.on("scene:change", ({ scene, transitionType }) => this._render(scene, transitionType));
+
+    // 螢幕尺寸或方向改變時（換手機直向/橫向、桌機縮放視窗...），
+    // 重新換算目前顯示中那個 stage 的 hotspot 位置
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        positionHotspotsForStage(this.stages[this.activeIndex]);
+      }, 120);
+    });
   }
 
   async _render(scene, transitionType) {
@@ -481,6 +538,13 @@ class SceneStage {
 
     if (SHOW_HOTSPOTS) {
       scene.hotspots.forEach((h) => toEl.appendChild(renderHotspot(h, this.onHotspotClick)));
+      // 圖片原始尺寸決定 object-fit:cover 實際裁切範圍，要等圖片載入完才能精確換算，
+      // 圖片如果已經是快取狀態（img.complete）就直接算，不然掛 load 事件等它載完
+      if (img.complete && img.naturalWidth) {
+        positionHotspotsForStage(toEl);
+      } else {
+        img.addEventListener("load", () => positionHotspotsForStage(toEl), { once: true });
+      }
     }
     // branch 型出口如果同時有多個，垂直往上疊開，避免疊在同一個位置點不到
     // 左邊分岔（side:"left"）跟右邊分岔各自獨立疊放，不共用同一組計數
