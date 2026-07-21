@@ -243,7 +243,16 @@ html, body {
   #lang-toggle { right: 12px; }
 
   /* 出口按鈕：手機版文字容易比按鈕寬（例如「左轉下樓」這種長標籤），
-     加上 max-width + 允許換行，不然文字會被硬擠成一長條、甚至超出螢幕。 */
+     加上 max-width + 允許換行，不然文字會被硬擠成一長條、甚至超出螢幕。
+
+     另外，場景最多可能同時出現 4 顆按鈕（返回＋左分岔＋往前走＋右分岔），
+     桌機版是靠「往前走」用 calc(50%+60px) 讓位給旁邊的返回鈕，這個位移量
+     在窄螢幕上换算後太靠右，會直接疊到右邊的分岔鈕上；返回鈕固定在左下角
+     也會跟左分岔鈕疊在同一個位置。手機版改成明確分兩排：
+       下排（bottom: 12px）：返回鈕（左）＋往前走（置中，不再用桌機那個
+         +60px 偏移，因為手機版返回鈕已經跟它分開一排，不用讓位）
+       上排（bottom: 68px）：左分岔（左）＋右分岔（右）
+     四顆最多同時出現時也不會互相重疊，只出現其中一兩顆時上/下排自然會空著。 */
   .scene-exit {
     bottom: 12px;
     padding: 0.5rem 0.8rem;
@@ -253,9 +262,12 @@ html, body {
     line-height: 1.25;
     text-align: center;
   }
-  .scene-exit--advance { max-width: 55vw; }
-  .scene-exit--branch { right: 12px; }
-  .scene-exit--branch-left { left: 12px; right: auto; }
+  .scene-exit--advance {
+    max-width: 55vw;
+    left: 50%; right: auto; transform: translateX(-50%);
+  }
+  .scene-exit--branch { right: 12px; bottom: 68px; }
+  .scene-exit--branch-left { left: 12px; right: auto; bottom: 68px; }
 
   /* 光點觸控目標加大：36px 對手指來說偏小，Apple/Google 的建議最小觸控
      尺寸都是 44px，這裡加大但視覺上的點（.hotspot-dot）維持原本比例，
