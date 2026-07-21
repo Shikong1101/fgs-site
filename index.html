@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<a class="skip-link" href="#main">Aller au contenu principal</a>
+<a class="skip-link" id="skip-link" href="#main">Aller au contenu principal</a>
 
 <!-- ============================================================ -->
 <!-- EN-TÊTE — fixe en haut de page, reste visible au défilement   -->
@@ -31,9 +31,11 @@
     </a>
 
     <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
-      <a href="#visite" data-view-link data-view="visite">Visite</a>
-      <a href="#audioguide" data-view-link data-view="audioguide">Audioguide</a>
+      <a href="#visite" data-view-link data-view="visite" id="nav-link-visite">Visite</a>
+      <a href="#audioguide" data-view-link data-view="audioguide" id="nav-link-audioguide">Audioguide</a>
     </nav>
+
+    <button type="button" id="lang-toggle-btn" class="lang-toggle-btn" aria-label="Changer de langue : français / English / 中文">FR</button>
   </div>
 </header>
 
@@ -45,7 +47,7 @@
   <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
   <aside class="sidebar" id="sidebar" aria-label="Sommaire de la visite">
     <div class="sidebar-head">
-      <span>Sommaire de la visite</span>
+      <span id="sidebar-title-text">Sommaire de la visite</span>
       <button class="icon-btn sidebar-close" id="sidebar-close-btn" aria-label="Fermer le sommaire">&times;</button>
     </div>
     <div class="sidebar-inner" id="sidebar-content">
@@ -63,11 +65,11 @@
       <div class="hero">
         <img src="images/hero-temple.webp" alt="Fo Guang Shan Genève — vue extérieure du temple" class="hero-image" />
         <div class="hero-text">
-          <p class="hero-eyebrow">Visite numérique</p>
+          <p class="hero-eyebrow" id="hero-eyebrow">Visite numérique</p>
           <h1 id="hero-title"></h1>
           <p id="hero-tagline" class="hero-tagline"></p>
           <div class="hero-actions">
-            <a href="#visite" class="btn btn-primary" data-view-link data-view="visite">Commencer la visite</a>
+            <a href="#visite" class="btn btn-primary" data-view-link data-view="visite" id="hero-start-btn">Commencer la visite</a>
             <button class="btn btn-secondary" id="hero-search-btn">Rechercher un objet</button>
           </div>
         </div>
@@ -78,35 +80,35 @@
       </div>
 
       <div class="section-block">
-        <h2 class="section-title">Trois façons d'explorer</h2>
+        <h2 class="section-title" id="explore-title">Trois façons d'explorer</h2>
         <div class="entry-grid">
           <a class="entry-card" href="#visite" data-view-link data-view="visite">
             <span class="entry-card-icon" aria-hidden="true">⛩</span>
-            <span class="entry-card-title">Visite complète</span>
-            <span class="entry-card-text">Toutes les fiches, zone par zone, dans l'ordre de la visite.</span>
+            <span class="entry-card-title" id="card-visite-title">Visite complète</span>
+            <span class="entry-card-text" id="card-visite-text">Toutes les fiches, zone par zone, dans l'ordre de la visite.</span>
           </a>
           <a class="entry-card" href="#paroles" data-view-link data-view="paroles">
             <span class="entry-card-icon" aria-hidden="true">文</span>
-            <span class="entry-card-title">Paroles du Dharma</span>
-            <span class="entry-card-text">Le texte de chaque fiche, présenté pour une lecture posée.</span>
+            <span class="entry-card-title" id="card-paroles-title">Paroles du Dharma</span>
+            <span class="entry-card-text" id="card-paroles-text">Le texte de chaque fiche, présenté pour une lecture posée.</span>
           </a>
           <a class="entry-card" href="#audioguide" data-view-link data-view="audioguide">
             <span class="entry-card-icon" aria-hidden="true">♪</span>
-            <span class="entry-card-title">Audioguide</span>
-            <span class="entry-card-text">Écoutez les commentaires, fiche par fiche ou en continu.</span>
+            <span class="entry-card-title" id="card-audio-title">Audioguide</span>
+            <span class="entry-card-text" id="card-audio-text">Écoutez les commentaires, fiche par fiche ou en continu.</span>
           </a>
         </div>
       </div>
 
       <div class="section-block">
-        <h2 class="section-title">Quelques points de visite</h2>
+        <h2 class="section-title" id="featured-title">Quelques points de visite</h2>
         <div class="card-grid" id="featured-items">
           <!-- Généré par script.js -->
         </div>
       </div>
 
       <div class="section-block">
-        <h2 class="section-title">Comment utiliser ce guide</h2>
+        <h2 class="section-title" id="howto-title">Comment utiliser ce guide</h2>
         <ol class="howto-list" id="howto-list">
           <!-- Généré par script.js -->
         </ol>
@@ -117,12 +119,12 @@
     <section id="view-visite" class="view" data-view="visite" hidden>
       <div class="view-header">
         <div>
-          <h1>Visite du temple</h1>
-          <p class="view-subtitle">Faites défiler la page dans l'ordre, ou choisissez un point de visite dans le sommaire.</p>
+          <h1 id="visite-h1">Visite du temple</h1>
+          <p class="view-subtitle" id="visite-subtitle">Faites défiler la page dans l'ordre, ou choisissez un point de visite dans le sommaire.</p>
         </div>
         <button class="btn btn-secondary toc-open-btn" id="toc-open-btn">
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="2"/><line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2"/><line x1="4" y1="18" x2="14" y2="18" stroke="currentColor" stroke-width="2"/></svg>
-          Sommaire
+          <span id="toc-open-btn-text">Sommaire</span>
         </button>
       </div>
 
@@ -136,7 +138,7 @@
       </div>
 
       <div class="back-to-overview">
-        <a href="#visite" id="visite-end-link" class="btn btn-secondary" data-action="toc">Revenir au début du sommaire</a>
+        <a href="#visite" id="back-to-overview-link" class="btn btn-secondary" data-action="toc">Revenir au début du sommaire</a>
       </div>
     </section>
 
@@ -144,8 +146,8 @@
     <section id="view-paroles" class="view" data-view="paroles" hidden>
       <div class="view-header">
         <div>
-          <h1>Paroles du Dharma</h1>
-          <p class="view-subtitle">Le texte intégral de chaque fiche, présenté pour une lecture posée et l'agrandissement du texte.</p>
+          <h1 id="paroles-h1">Paroles du Dharma</h1>
+          <p class="view-subtitle" id="paroles-subtitle">Le texte intégral de chaque fiche, présenté pour une lecture posée et l'agrandissement du texte.</p>
         </div>
       </div>
       <div id="paroles-list" class="paroles-list">
@@ -157,8 +159,8 @@
     <section id="view-audioguide" class="view" data-view="audioguide" hidden>
       <div class="view-header">
         <div>
-          <h1>Audioguide</h1>
-          <p class="view-subtitle">Écoutez le commentaire de chaque point de visite. La lecture ne démarre jamais automatiquement.</p>
+          <h1 id="audioguide-h1">Audioguide</h1>
+          <p class="view-subtitle" id="audioguide-subtitle">Écoutez le commentaire de chaque point de visite. La lecture ne démarre jamais automatiquement.</p>
         </div>
         <button class="btn btn-primary" id="play-all-btn">▶ Écouter toute la visite</button>
       </div>
@@ -171,24 +173,24 @@
     <section id="view-apropos" class="view" data-view="apropos" hidden>
       <div class="view-header">
         <div>
-          <h1>À propos du temple</h1>
+          <h1 id="apropos-h1">À propos du temple</h1>
         </div>
       </div>
       <div class="apropos-grid">
         <div class="apropos-block">
-          <h2>Présentation</h2>
+          <h2 id="apropos-presentation-title">Présentation</h2>
           <p id="apropos-intro"></p>
         </div>
         <div class="apropos-block">
-          <h2>Informations pratiques</h2>
+          <h2 id="apropos-pratique-title">Informations pratiques</h2>
           <ul id="apropos-opening"></ul>
         </div>
         <div class="apropos-block">
-          <h2>À votre attention</h2>
+          <h2 id="apropos-attention-title">À votre attention</h2>
           <ul id="apropos-notices"></ul>
         </div>
         <div class="apropos-block">
-          <h2>Contact</h2>
+          <h2 id="apropos-contact-title">Contact</h2>
           <dl id="apropos-contact" class="contact-list"></dl>
         </div>
       </div>
@@ -226,7 +228,7 @@
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4Z" fill="currentColor"/></svg>
         <input type="range" id="audio-volume" min="0" max="100" value="100" aria-label="Volume" />
       </label>
-      <label class="audio-speed-label" for="audio-speed">Vitesse
+      <label class="audio-speed-label" for="audio-speed"><span id="audio-speed-text">Vitesse</span>
         <select id="audio-speed" aria-label="Vitesse de lecture">
           <option value="0.75">0.75×</option>
           <option value="1" selected>1×</option>
@@ -249,7 +251,7 @@
 <!-- ============================================================ -->
 <div class="search-modal" id="search-modal" hidden>
   <div class="search-modal-backdrop" id="search-modal-backdrop"></div>
-  <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Recherche">
+  <div class="search-modal-panel" id="search-modal-panel" role="dialog" aria-modal="true" aria-label="Recherche">
     <div class="search-modal-head">
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <input type="search" id="search-input" placeholder="Rechercher un objet, une zone, un mot du texte, un numéro de fiche…" aria-label="Rechercher" />
@@ -266,22 +268,25 @@
 <!-- ============================================================ -->
 <div class="image-modal" id="image-modal" hidden>
   <div class="image-modal-backdrop" id="image-modal-backdrop"></div>
-  <div class="image-modal-panel" role="dialog" aria-modal="true" aria-label="Image agrandie">
+  <div class="image-modal-panel" id="image-modal-panel" role="dialog" aria-modal="true" aria-label="Image agrandie">
     <button class="icon-btn image-modal-close" id="image-modal-close" aria-label="Fermer l'image agrandie">&times;</button>
     <img id="image-modal-img" src="" alt="" />
   </div>
 </div>
 
 <footer class="site-footer">
-  <p>Fo Guang Shan Genève — Guide de visite numérique. Contenu d'après les fiches d'information du temple.</p>
+  <p id="site-footer-text">Fo Guang Shan Genève — Guide de visite numérique. Contenu d'après les fiches d'information du temple.</p>
 </footer>
 
 <noscript>
   <p style="padding:2rem;text-align:center;">
-    Ce guide de visite a besoin de JavaScript pour fonctionner. Merci d'activer JavaScript dans votre navigateur.
+    Ce guide de visite a besoin de JavaScript pour fonctionner. Merci d'activer JavaScript dans votre navigateur.<br />
+    This tour guide requires JavaScript to work. Please enable JavaScript in your browser.<br />
+    本導覽指南需要啟用 JavaScript 才能運作，請在瀏覽器中開啟 JavaScript。
   </p>
 </noscript>
 
+<script src="lang.js"></script>
 <script src="data.js"></script>
 <!-- script.js 現在改由 data.js 在資料載入完成後動態插入，這裡不再需要靜態載入 -->
 

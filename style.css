@@ -243,6 +243,24 @@ select:focus-visible,
 .main-nav a:hover { background: var(--stone); color: var(--wood-dark); }
 .main-nav a.active { background: var(--wood-dark); color: var(--paper); }
 
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 0.9em;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--stone-line);
+  background: transparent;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.16s var(--ease), color 0.16s var(--ease);
+}
+.lang-toggle-btn:hover { background: var(--stone); color: var(--wood-dark); }
+
 .hamburger { display: none; }
 .hamburger-bar {
   display: block;

@@ -12,31 +12,50 @@ const SHOW_HOTSPOTS = true; // 開始調光點座標
 const SHOW_DEBUG_HUD = false; // 場景動線已經測穩，關掉左下角除錯視窗
 
 // ============================================================
-// 語言切換 — 只翻譯 16 篇導覽文字本身（title / shortDescription / fullText），
-// 其他一律維持法文（類別、分區、按鈕、音檔...不動），音檔本身也只有法文。
+// 語言切換 — 翻譯 16 篇導覽文字本身（title / shortDescription / fullText）、
+// 場景與出口標籤（label）、側邊欄的分區名稱，其餘（類別、音檔...）不動，
+// 音檔本身目前只有法文，不隨語言切換。
 // ============================================================
+const LANG_ORDER = ["fr", "en", "zh"];
+const LANG_SHORT_LABEL = { fr: "FR", en: "EN", zh: "中文" };
+
 let CURRENT_LANG = localStorage.getItem("fgs_lang") || "fr";
+if (!LANG_ORDER.includes(CURRENT_LANG)) CURRENT_LANG = "fr"; // 保險：舊版只存過 fr/en，值不合法就退回法文
 
 function setLang(lang) {
   CURRENT_LANG = lang;
   localStorage.setItem("fgs_lang", lang);
 }
 
-/** 取得某個導覽項目在目前語言下的欄位，沒有對應的英文欄位時自動退回法文 */
+/** 取得某個導覽項目在目前語言下的欄位，中／英文缺哪個就自動退回法文 */
 function tItem(item, field) {
+  if (CURRENT_LANG === "zh" && item[field + "_zh"]) return item[field + "_zh"];
   if (CURRENT_LANG === "en" && item[field + "_en"]) return item[field + "_en"];
   return item[field];
 }
 
 // 介面上固定不變的字（跟 TOUR_ITEMS/SCENES 無關的按鈕文字）
 const UI_STRINGS = {
-  sommaireToggle: { fr: "☰ Sommaire", en: "☰ Menu" },
-  sommaireToggleLabel: { fr: "Ouvrir le sommaire de la visite", en: "Open the tour menu" },
-  backBtn: { fr: "← Précédent", en: "← Back" },
-  backBtnLabel: { fr: "Précédent", en: "Back" },
+  sommaireToggle: { fr: "☰ Sommaire", en: "☰ Menu", zh: "☰ 目錄" },
+  sommaireToggleLabel: { fr: "Ouvrir le sommaire de la visite", en: "Open the tour menu", zh: "開啟導覽目錄" },
+  backBtn: { fr: "← Précédent", en: "← Back", zh: "← 上一步" },
+  backBtnLabel: { fr: "Précédent", en: "Back", zh: "上一步" },
 };
 function tUi(key) {
   return UI_STRINGS[key][CURRENT_LANG] || UI_STRINGS[key].fr;
+}
+
+// 側邊欄分區標題的翻譯表（AREAS 陣列本身、item.area 欄位都維持法文原值當 key，
+// 不要動，純粹拿來比對分組用；顯示時才透過 tArea() 換成目前語言的文字）
+const AREA_LABELS = {
+  "Entrée et parvis": { fr: "Entrée et parvis", en: "Entrance and Forecourt", zh: "入口與前庭" },
+  "Grande salle du Bouddha": { fr: "Grande salle du Bouddha", en: "Great Buddha Hall", zh: "大雄寶殿" },
+  "Salle de Ksitigarbha": { fr: "Salle de Ksitigarbha", en: "Ksitigarbha Hall", zh: "地藏殿" },
+};
+function tArea(area) {
+  const entry = AREA_LABELS[area];
+  if (!entry) return area; // 保險：萬一之後加了新分區忘記填翻譯表，至少顯示法文原值不會空白
+  return entry[CURRENT_LANG] || entry.fr;
 }
 
 function debugLog(msg) {
@@ -553,7 +572,7 @@ function renderSommaire(onItemClick) {
   AREAS.forEach((area) => {
     const group = document.createElement("div");
     group.className = "sommaire__group";
-    group.innerHTML = `<h3>${area}</h3>`;
+    group.innerHTML = `<h3>${tArea(area)}</h3>`;
     TOUR_ITEMS.filter((i) => i.area === area).forEach((item) => {
       const btn = document.createElement("button");
       btn.className = "sommaire__item";
@@ -740,10 +759,11 @@ document.addEventListener("DOMContentLoaded", () => {
   refreshSommaire();
   applyUiStrings();
 
-  langToggle.textContent = CURRENT_LANG === "en" ? "FR" : "EN";
+  langToggle.textContent = LANG_SHORT_LABEL[CURRENT_LANG];
   langToggle.addEventListener("click", () => {
-    setLang(CURRENT_LANG === "en" ? "fr" : "en");
-    langToggle.textContent = CURRENT_LANG === "en" ? "FR" : "EN";
+    const nextIdx = (LANG_ORDER.indexOf(CURRENT_LANG) + 1) % LANG_ORDER.length;
+    setLang(LANG_ORDER[nextIdx]);
+    langToggle.textContent = LANG_SHORT_LABEL[CURRENT_LANG];
     applyUiStrings();
     sceneStage.relabel(); // 目前這一景的出口按鈕／alt 文字換語言，不重播轉場
     refreshSommaire(); // 側邊目錄的標題要跟著換語言

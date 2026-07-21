@@ -92,13 +92,13 @@
   /* ------------------------------------------------------------------ */
 
   function renderHome() {
-    $("#hero-title").textContent = TEMPLE_INFO.name;
-    $("#hero-tagline").textContent = TEMPLE_INFO.tagline;
-    $("#home-intro").textContent = TEMPLE_INFO.intro;
+    $("#hero-title").textContent = tInfo("name");
+    $("#hero-tagline").textContent = tInfo("tagline");
+    $("#home-intro").textContent = tInfo("intro");
 
     const howto = $("#howto-list");
     howto.innerHTML = "";
-    TEMPLE_INFO.howToUse.forEach((step) => howto.appendChild(el("li", null, [step])));
+    tInfo("howToUse").forEach((step) => howto.appendChild(el("li", null, [step])));
 
     const featured = $("#featured-items");
     featured.innerHTML = "";
@@ -111,9 +111,9 @@
         el("img", { src: item.image, alt: item.imageAlt, loading: "lazy" }),
       ]),
       el("div", { class: "tour-card-body" }, [
-        el("span", { class: "tour-card-eyebrow" }, [item.category + " · " + item.area]),
-        el("h3", { class: "tour-card-title" }, [item.title]),
-        el("p", { class: "tour-card-desc" }, [item.shortDescription]),
+        el("span", { class: "tour-card-eyebrow" }, [item.category + " · " + tArea(item.area)]),
+        el("h3", { class: "tour-card-title" }, [tItem(item, "title")]),
+        el("p", { class: "tour-card-desc" }, [tItem(item, "shortDescription")]),
         el("div", { class: "tour-card-actions" }, [
           el(
             "a",
@@ -125,7 +125,7 @@
                 goToView("visite", item.id);
               },
             },
-            ["Voir la fiche"]
+            [tUi("viewCardBtn")]
           ),
           el(
             "button",
@@ -133,7 +133,7 @@
               class: "btn btn-secondary",
               onclick: () => playItem(item.id),
             },
-            ["▶ Écouter"]
+            [tUi("listenShortBtn")]
           ),
         ]),
       ]),
@@ -159,7 +159,7 @@
         "button",
         { class: "toc-area-title", "aria-expanded": "true" },
         [
-          el("span", null, [area]),
+          el("span", null, [tArea(area)]),
           el("span", { class: "toc-area-toggle-icon", "aria-hidden": "true" }, ["▾"]),
         ]
       );
@@ -184,7 +184,7 @@
                   closeMobileSidebar();
                 },
               },
-              [item.order + ". " + item.title]
+              [item.order + ". " + tItem(item, "title")]
             ),
           ])
         )
@@ -211,7 +211,7 @@
   /* Rendu : vue Visite (filtres + zones + fiches détaillées)            */
   /* ------------------------------------------------------------------ */
 
-  let activeAreaFilter = "Toutes les zones";
+  let activeAreaFilter = ALL_AREAS_KEY;
   let refreshScrollSpy = null; // assignée après initScrollSpy() dans init()
 
   function renderFilterBar() {
@@ -220,10 +220,10 @@
     const allChip = el(
       "button",
       {
-        class: "filter-chip" + (activeAreaFilter === "Toutes les zones" ? " active" : ""),
-        onclick: () => setAreaFilter("Toutes les zones"),
+        class: "filter-chip" + (activeAreaFilter === ALL_AREAS_KEY ? " active" : ""),
+        onclick: () => setAreaFilter(ALL_AREAS_KEY),
       },
-      ["Toutes les zones"]
+      [tUi("allAreas")]
     );
     bar.appendChild(allChip);
     AREAS.forEach((area) => {
@@ -233,7 +233,7 @@
           class: "filter-chip" + (activeAreaFilter === area ? " active" : ""),
           onclick: () => setAreaFilter(area),
         },
-        [area]
+        [tArea(area)]
       );
       bar.appendChild(chip);
     });
@@ -252,15 +252,15 @@
     const grouped = itemsByArea();
 
     AREAS.forEach((area) => {
-      if (activeAreaFilter !== "Toutes les zones" && activeAreaFilter !== area) return;
+      if (activeAreaFilter !== ALL_AREAS_KEY && activeAreaFilter !== area) return;
       const items = grouped[area] || [];
       if (!items.length) return;
 
       const section = el("section", { class: "area-group", id: "zone-" + slugify(area) }, [
         el("div", { class: "area-group-head" }, [
-          el("h2", null, [area]),
+          el("h2", null, [tArea(area)]),
           el("span", { class: "area-group-count" }, [
-            items.length + (items.length > 1 ? " éléments" : " élément"),
+            items.length + (items.length > 1 ? tUi("itemsCountMany") : tUi("itemsCountOne")),
           ]),
         ]),
       ]);
@@ -288,12 +288,12 @@
           el(
             "button",
             {
-              "aria-label": "Agrandir l'image : " + item.title,
+              "aria-label": tUi("enlargeImageLabel") + tItem(item, "title"),
               onclick: () => openImageModal(item.image, item.imageAlt),
             },
             [el("img", { src: item.image, alt: item.imageAlt, loading: "lazy" })]
           ),
-          el("p", { class: "tour-item-media-caption" }, ["Touchez l'image pour l'agrandir"]),
+          el("p", { class: "tour-item-media-caption" }, [tUi("tapToEnlarge")]),
         ]),
         el("div", { class: "tour-item-meta" }, [
           el("p", { class: "tour-item-eyebrow" }, [
@@ -301,20 +301,20 @@
             el("span", { class: "sep" }, ["·"]),
             el("span", null, [item.category]),
             el("span", { class: "sep" }, ["·"]),
-            el("span", null, [item.area]),
+            el("span", null, [tArea(item.area)]),
           ]),
-          el("h2", { class: "tour-item-title" }, [item.title]),
-          el("p", { class: "tour-item-short" }, [item.shortDescription]),
+          el("h2", { class: "tour-item-title" }, [tItem(item, "title")]),
+          el("p", { class: "tour-item-short" }, [tItem(item, "shortDescription")]),
           el("div", { class: "tour-item-actions" }, [
             el(
               "button",
               { class: "btn btn-primary", onclick: () => playItem(item.id) },
-              ["▶ Écouter le commentaire"]
+              [tUi("listenBtn")]
             ),
             el(
               "a",
               { href: "#visite", class: "btn btn-secondary", onclick: (e) => { e.preventDefault(); openToc(); } },
-              ["Sommaire"]
+              [tUi("itemSommaireBtn")]
             ),
           ]),
         ]),
@@ -322,7 +322,7 @@
       el(
         "div",
         { class: "tour-item-body" },
-        item.fullText.map((para) => el("p", null, [para]))
+        tItem(item, "fullText").map((para) => el("p", null, [para]))
       ),
       el("div", { class: "tour-item-nav" }, [
         prev
@@ -334,8 +334,8 @@
                 onclick: (e) => { e.preventDefault(); goToView("visite", prev.id); },
               },
               [
-                el("span", { class: "tour-item-nav-label" }, ["← Précédent"]),
-                el("span", { class: "tour-item-nav-title" }, [prev.title]),
+                el("span", { class: "tour-item-nav-label" }, [tUi("prevItem")]),
+                el("span", { class: "tour-item-nav-title" }, [tItem(prev, "title")]),
               ]
             )
           : el("span", null, []),
@@ -348,8 +348,8 @@
                 onclick: (e) => { e.preventDefault(); goToView("visite", next.id); },
               },
               [
-                el("span", { class: "tour-item-nav-label" }, ["Suivant →"]),
-                el("span", { class: "tour-item-nav-title" }, [next.title]),
+                el("span", { class: "tour-item-nav-label" }, [tUi("nextItem")]),
+                el("span", { class: "tour-item-nav-title" }, [tItem(next, "title")]),
               ]
             )
           : el("span", null, []),
@@ -373,15 +373,15 @@
         [
           el("summary", null, [
             el("span", null, [
-              el("span", { class: "summary-eyebrow" }, ["N° " + item.id + " · " + item.area]),
-              item.title,
+              el("span", { class: "summary-eyebrow" }, ["N° " + item.id + " · " + tArea(item.area)]),
+              tItem(item, "title"),
             ]),
             el("span", { class: "parole-toggle-icon", "aria-hidden": "true" }, ["▾"]),
           ]),
           el(
             "div",
             { class: "parole-body" },
-            item.fullText.map((para) => el("p", null, [para]))
+            tItem(item, "fullText").map((para) => el("p", null, [para]))
           ),
         ]
       );
@@ -405,14 +405,14 @@
             "button",
             {
               class: "playlist-play-btn",
-              "aria-label": "Lire : " + item.title,
+              "aria-label": tUi("playItemLabel") + tItem(item, "title"),
               onclick: () => playItem(item.id),
             },
             ["▶"]
           ),
           el("div", { class: "playlist-info" }, [
-            el("div", { class: "playlist-title" }, [item.order + ". " + item.title]),
-            el("div", { class: "playlist-meta" }, [item.area]),
+            el("div", { class: "playlist-title" }, [item.order + ". " + tItem(item, "title")]),
+            el("div", { class: "playlist-meta" }, [tArea(item.area)]),
           ]),
           el("div", { class: "playlist-duration" }, [formatTime(item.audioDuration)]),
         ]
@@ -432,24 +432,24 @@
   /* ------------------------------------------------------------------ */
 
   function renderApropos() {
-    $("#apropos-intro").textContent = TEMPLE_INFO.intro;
+    $("#apropos-intro").textContent = tInfo("intro");
 
     const opening = $("#apropos-opening");
     opening.innerHTML = "";
-    TEMPLE_INFO.openingInfo.forEach((line) => opening.appendChild(el("li", null, [line])));
+    tInfo("openingInfo").forEach((line) => opening.appendChild(el("li", null, [line])));
 
     const notices = $("#apropos-notices");
     notices.innerHTML = "";
-    TEMPLE_INFO.notices.forEach((line) => notices.appendChild(el("li", null, [line])));
+    tInfo("notices").forEach((line) => notices.appendChild(el("li", null, [line])));
 
     const contact = $("#apropos-contact");
     contact.innerHTML = "";
-    const c = TEMPLE_INFO.contact;
+    const c = tInfo("contact");
     [
-      ["Adresse", c.address],
-      ["Téléphone", c.phone],
-      ["E-mail", c.email],
-      ["Site web", c.website],
+      [tUi("labelAddress"), c.address],
+      [tUi("labelPhone"), c.phone],
+      [tUi("labelEmail"), c.email],
+      [tUi("labelWebsite"), c.website],
     ].forEach(([label, value]) => {
       contact.appendChild(el("dt", null, [label]));
       contact.appendChild(el("dd", null, [value]));
@@ -550,8 +550,8 @@
     audio.src = item.audio;
     audio.playbackRate = parseFloat($("#audio-speed").value || "1");
 
-    $("#audio-dock-eyebrow").textContent = "N° " + item.id + " · " + item.area;
-    $("#audio-dock-title").textContent = item.title;
+    $("#audio-dock-eyebrow").textContent = "N° " + item.id + " · " + tArea(item.area);
+    $("#audio-dock-title").textContent = tItem(item, "title");
     $("#audio-duration").textContent = formatTime(item.audioDuration);
     $("#audio-seek").value = 0;
     $("#audio-current-time").textContent = "0:00";
@@ -577,7 +577,7 @@
 
   function setPlayButtonState(isPlaying) {
     $("#audio-play-btn").textContent = isPlaying ? "❚❚" : "▶";
-    $("#audio-play-btn").setAttribute("aria-label", isPlaying ? "Pause" : "Lecture");
+    $("#audio-play-btn").setAttribute("aria-label", isPlaying ? tUi("audioPauseLabel") : tUi("audioPlayLabel"));
   }
 
   function togglePlayPause() {
@@ -673,7 +673,7 @@
   function openSearch() {
     $("#search-modal").hidden = false;
     $("#search-input").value = "";
-    $("#search-results").innerHTML = '<p class="search-hint">Tapez au moins deux lettres pour lancer la recherche.</p>';
+    $("#search-results").innerHTML = '<p class="search-hint">' + tUi("searchHint") + '</p>';
     setTimeout(() => $("#search-input").focus(), 30);
   }
   function closeSearch() {
@@ -684,18 +684,18 @@
     const results = $("#search-results");
     const q = query.trim().toLowerCase();
     if (q.length < 2) {
-      results.innerHTML = '<p class="search-hint">Tapez au moins deux lettres pour lancer la recherche.</p>';
+      results.innerHTML = '<p class="search-hint">' + tUi("searchHint") + '</p>';
       return;
     }
 
     const matches = TOUR_ITEMS.filter((item) => {
       const haystack = [
         item.id,
-        item.title,
+        tItem(item, "title"),
         item.category,
-        item.area,
-        item.shortDescription,
-        item.fullText.join(" "),
+        tArea(item.area),
+        tItem(item, "shortDescription"),
+        tItem(item, "fullText").join(" "),
       ]
         .join(" ")
         .toLowerCase();
@@ -704,7 +704,7 @@
 
     results.innerHTML = "";
     if (!matches.length) {
-      results.appendChild(el("p", { class: "search-hint" }, ["Aucun résultat pour « " + query + " »."]));
+      results.appendChild(el("p", { class: "search-hint" }, [tUi("searchNoResults", query)]));
       return;
     }
 
@@ -723,11 +723,11 @@
         [
           el("img", { src: item.image, alt: "", loading: "lazy" }),
           el("span", { class: "search-result-text" }, [
-            el("span", { class: "search-result-title" }, [item.title]),
+            el("span", { class: "search-result-title" }, [tItem(item, "title")]),
             el("br"),
-            el("span", { class: "search-result-meta" }, ["N° " + item.id + " · " + item.category + " · " + item.area]),
+            el("span", { class: "search-result-meta" }, ["N° " + item.id + " · " + item.category + " · " + tArea(item.area)]),
             el("br"),
-            el("span", { class: "search-result-desc" }, [item.shortDescription]),
+            el("span", { class: "search-result-desc" }, [tItem(item, "shortDescription")]),
           ]),
         ]
       );
@@ -813,6 +813,41 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Changement de langue                                                */
+  /* ------------------------------------------------------------------ */
+
+  function refreshAllContent() {
+    renderHome();
+    renderSidebar();
+    renderFilterBar();
+    renderTourSections();
+    renderParoles();
+    renderPlaylist();
+    renderApropos();
+    applyStaticUiStrings();
+    // 分區/項目列表整個重建過，IntersectionObserver 要重新綁定到新的 DOM 節點上
+    if (refreshScrollSpy) requestAnimationFrame(refreshScrollSpy);
+    // 播放器目前顯示的標題/分區名稱是渲染當下寫死的文字，語言切換時要手動補一次
+    if (currentItemId) {
+      const item = findItem(currentItemId);
+      if (item) {
+        $("#audio-dock-eyebrow").textContent = "N° " + item.id + " · " + tArea(item.area);
+        $("#audio-dock-title").textContent = tItem(item, "title");
+      }
+    }
+  }
+
+  function initLangToggle() {
+    const btn = $("#lang-toggle-btn");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const nextIdx = (LANG_ORDER.indexOf(CURRENT_LANG) + 1) % LANG_ORDER.length;
+      setLang(LANG_ORDER[nextIdx]);
+      refreshAllContent();
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
   /* En-tête : menu mobile                                               */
   /* ------------------------------------------------------------------ */
 
@@ -849,8 +884,10 @@
     renderParoles();
     renderPlaylist();
     renderApropos();
+    applyStaticUiStrings();
 
     initHeader();
+    initLangToggle();
     initAudioPlayer();
     initSearch();
     initImageModal();
@@ -870,7 +907,7 @@
           { class: "resume-banner" },
           [
             el("p", null, [
-              "Vous étiez en train de consulter « " + findItem(last).title + " ». ",
+              tUi("resumeViewing", tItem(findItem(last), "title")),
             ]),
             el(
               "button",
@@ -878,7 +915,7 @@
                 class: "btn btn-secondary",
                 onclick: () => goToView("visite", last),
               },
-              ["Reprendre la visite"]
+              [tUi("resumeBtn")]
             ),
           ]
         );
